@@ -41,8 +41,8 @@ function Login() {
   const [spin, setSpin] = useState(null);
   const navigate = useNavigate();
 
-  const BASE_URL = `${process.env.REACT_APP_API_URL}`;
-  // const endpoint = '/seller/sign-in';
+  const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
+  const endpoint = '/seller/sign-in';
 
 useEffect(() => {
      setErrorMessage('');
@@ -90,12 +90,12 @@ useEffect(() => {
 
     {/* Fetch Api */}
     try {
-        // const response = await fetch(BASE_URL + endpoint, {
-          const response = await fetch(`${process.env.REACT_APP_API_URL}/seller/sign-in`, {
+        const response = await fetch(BASE_URL + endpoint, {
+          // const response = await fetch(`${process.env.REACT_APP_API_URL}/seller/sign-in`, {
           method: 'POST',
           headers: {
-            // 'app-token': 'sdksd2o32usdf239djfnasojiuhrui2h3rjknweuh4ro8q2hrjwdbfoq274hrqo8e7rgsdbasdjkfnq8uerq948ri24jrdmnfau2q8h4r8oqwhrqwy8rg8oqg623ruqyhkasdjnbq3er2wurgwebsdnbq837y2egrub',
-            'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`,
+            'app-token': 'sdksd2o32usdf239djfnasojiuhrui2h3rjknweuh4ro8q2hrjwdbfoq274hrqo8e7rgsdbasdjkfnq8uerq948ri24jrdmnfau2q8h4r8oqwhrqwy8rg8oqg623ruqyhkasdjnbq3er2wurgwebsdnbq837y2egrub',
+            // 'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`,
             'Content-Type': 'application/json',
             'origin': '*',
           },
