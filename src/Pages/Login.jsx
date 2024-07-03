@@ -21,7 +21,7 @@ function Modal({ message, type, onClose }) {
         <div className='ml-12'>{message}</div> 
       </div>
 
-      <button style={{ marginLeft: '470px', top: '10px', overflow: 'hidden'}} onClick={onClose} className='absolute text-black2 text-lg top-30 left-20 sm:overflow-hidden font-normal'>
+      <button style={{ marginLeft: '470px', top: '10px', overflow: 'hidden'}} onClick={onClose} className='absolute text-black2 text-lg top-30 right-4 sm:overflow-hidden font-normal'>
           &times;</button>
     </div>
           
@@ -145,7 +145,7 @@ useEffect(() => {
     // <div className="grid items-center  md:py-0 md:px-0 md:block bg-fixed z-50 sm:object-cover lg:bg-contain bg-no-repeat md:bg-right" style={{ backgroundImage: `url(${fisher})`, width: '100%', height: '100vh' }} >
     <div>  
       <div className='grid justify-items-center bg-white md:bg-none'>
-        <div className='py-20 px-2 w-full md:px-14 space-y-4 sm:m-12 lg:m-0 items-center rounded-lg'>
+        <div className='py-20 px-4 w-full md:px-80 space-y-4 sm:m-12 lg:m-0 items-center rounded-lg'>
           {isModalOpen && (
               <Modal
                 message={errors || successMessage}
@@ -166,7 +166,7 @@ useEffect(() => {
               {/* Email */}
               <label htmlFor="email" className='text-md md:text-xl text-left mb-8'>Email</label><br/>
               <input 
-                className='border-2 p-4 w-96 md:w-full rounded-md border-fa bg-fa focus:outline-primary focus:bg-fa' 
+                className='border-2 p-4 w-72 md:w-full rounded-md border-fa bg-fa focus:outline-primary focus:bg-fa' 
                 type='email' 
                 id = "email" 
                 placeholder='example@gmail.com'
@@ -180,7 +180,7 @@ useEffect(() => {
             <div className='space-y-2' style={{ position: 'relative' }}>
               <label htmlFor="pwd" className='text-md md:text-xl text-left mb-8'>Password</label><br/>
               <input 
-                className='border-2 p-6 w-full md:w-full rounded-md border-fa bg-fa focus:bg-fa focus:outline-primary' 
+                className='border-2 p-6 w-72 md:w-full rounded-md border-fa bg-fa focus:bg-fa focus:outline-primary' 
                 type= {showPassword ? 'text' : 'password'}
                 id = "pwd" 
                 placeholder='Enter your password'
@@ -227,7 +227,7 @@ useEffect(() => {
             // disabled={loading} 
             className='w-full mt-4 py-4 px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'
             />  */}
-            <button type="submit" onClick = {handleSubmit} disabled={spin} className='w-full md:w-64 mt-4 py-4 px-20 md:px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'>
+            <button type="submit" onClick = {handleSubmit} disabled={spin} className='w-72 md:w-full mt-4 py-4 px-20 md:px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'>
               {spin ? <div className="px-2 text-2xl"><FaSpinner className="animate-spin" /> </div> : 'Sign In'}
             </button>
           </form>
