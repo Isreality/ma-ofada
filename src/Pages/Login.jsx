@@ -41,8 +41,8 @@ function Login() {
   const [spin, setSpin] = useState(null);
   const navigate = useNavigate();
 
-  const BASE_URL = 'https://35b6-102-89-23-79.ngrok-free.app/api';
-  const endpoint = '/seller/sign-in';
+  const BASE_URL = `${process.env.REACT_APP_API_URL}`;
+  // const endpoint = '/seller/sign-in';
 
 useEffect(() => {
      setErrorMessage('');
@@ -90,10 +90,12 @@ useEffect(() => {
 
     {/* Fetch Api */}
     try {
-        const response = await fetch(BASE_URL + endpoint, {
+        // const response = await fetch(BASE_URL + endpoint, {
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/seller/sign-in`, {
           method: 'POST',
           headers: {
-            'app-token': 'sdksd2o32usdf239djfnasojiuhrui2h3rjknweuh4ro8q2hrjwdbfoq274hrqo8e7rgsdbasdjkfnq8uerq948ri24jrdmnfau2q8h4r8oqwhrqwy8rg8oqg623ruqyhkasdjnbq3er2wurgwebsdnbq837y2egrub',
+            // 'app-token': 'sdksd2o32usdf239djfnasojiuhrui2h3rjknweuh4ro8q2hrjwdbfoq274hrqo8e7rgsdbasdjkfnq8uerq948ri24jrdmnfau2q8h4r8oqwhrqwy8rg8oqg623ruqyhkasdjnbq3er2wurgwebsdnbq837y2egrub',
+            'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`,
             'Content-Type': 'application/json',
             'origin': '*',
           },
@@ -140,9 +142,10 @@ useEffect(() => {
 
 
   return (
-    <div className="grid items-center  md:py-0 md:px-0 md:block bg-fixed sm:object-cover lg:bg-contain bg-no-repeat md:bg-right" style={{ backgroundImage: `url(${fisher})`, width: '100%', height: '100vh' }} >
-      <div className='grid justify-items-start'>
-        <div className='py-20 px-14 space-y-4 sm:m-12 lg:m-0 items-center rounded-lg'>
+    // <div className="grid items-center  md:py-0 md:px-0 md:block bg-fixed z-50 sm:object-cover lg:bg-contain bg-no-repeat md:bg-right" style={{ backgroundImage: `url(${fisher})`, width: '100%', height: '100vh' }} >
+    <div>  
+      <div className='grid justify-items-center bg-white md:bg-none'>
+        <div className='py-20 px-2 w-full md:px-14 space-y-4 sm:m-12 lg:m-0 items-center rounded-lg'>
           {isModalOpen && (
               <Modal
                 message={errors || successMessage}
@@ -177,7 +180,7 @@ useEffect(() => {
             <div className='space-y-2' style={{ position: 'relative' }}>
               <label htmlFor="pwd" className='text-md md:text-xl text-left mb-8'>Password</label><br/>
               <input 
-                className='border-2 p-4 w-96 md:w-full rounded-md border-fa bg-fa focus:bg-fa focus:outline-primary' 
+                className='border-2 p-6 w-full md:w-full rounded-md border-fa bg-fa focus:bg-fa focus:outline-primary' 
                 type= {showPassword ? 'text' : 'password'}
                 id = "pwd" 
                 placeholder='Enter your password'
@@ -224,7 +227,7 @@ useEffect(() => {
             // disabled={loading} 
             className='w-full mt-4 py-4 px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'
             />  */}
-            <button type="submit" onClick = {handleSubmit} disabled={spin} className='w-96 md:w-full mt-4 py-4 px-20 md:px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'>
+            <button type="submit" onClick = {handleSubmit} disabled={spin} className='w-full md:w-64 mt-4 py-4 px-20 md:px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'>
               {spin ? <div className="px-2 text-2xl"><FaSpinner className="animate-spin" /> </div> : 'Sign In'}
             </button>
           </form>

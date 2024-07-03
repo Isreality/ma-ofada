@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState('');
   const [statusCode, setStatusCode] = useState(null);
 
-  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMzViNi0xMDItODktMjMtNzkubmdyb2stZnJlZS5hcHAvYXBpL3NlbGxlci9zaWduLWluIiwiaWF0IjoxNzE5OTQwNTg2LCJleHAiOjE3MjI1MzI1ODYsIm5iZiI6MTcxOTk0MDU4NiwianRpIjoiUXBrVHhsOEIyclN0ZHZYVSIsInN1YiI6IjE0IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.QStbRzLs2f-S6eKafqZDkfoUPllcdkeYukZEy71N7VA';
+  const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMzViNi0xMDItODktMjMtNzkubmdyb2stZnJlZS5hcHAvYXBpL3NlbGxlci9zaWduLWluIiwiaWF0IjoxNzE5OTQ3NjM4LCJleHAiOjE3MjI1Mzk2MzgsIm5iZiI6MTcxOTk0NzYzOCwianRpIjoidU9Vck9QYWRvbTNza1Y3MSIsInN1YiI6IjE0IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.dyFwAZf2j1wKriurKjw1iMlSA1vx7YNs22uAUTtkxv0';
 
   // Function to refresh the token
   const fetchNewToken = async () => {

@@ -10,7 +10,7 @@ const Header = ({className, icons, title, info}) => {
     const [stat, setStat] = useState([]);
     const [error, setError] = useState(null);
 
-    const BASE_URL = 'https://35b6-102-89-23-79.ngrok-free.app/api';
+    const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
     const endpoint = '/seller/dashboard/get-stats';
     // const Atoken = sessionStorage.getItem('data').accesstoken;
 

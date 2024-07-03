@@ -9,7 +9,7 @@ const Reviews = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const BASE_URL = 'https://35b6-102-89-23-79.ngrok-free.app/api';
+  const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
   const endpoint = '/seller/dashboard/get-ratings?rating=1';
 
     // useEffect(() => {
