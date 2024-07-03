@@ -9,12 +9,12 @@ import Sidebar from "../Components/Sidebar";
 import Header from "../Components/Header";
 import Heading from "../Components/Heading";
 import AddProduct from "../Components/AddProduct";
-// import DataTable from 'react-data-table-component';
-// import axios from 'axios';
+import { useAuth } from '../Components/AuthContext';
 
 
 function Product () {
     const [data, setData] = useState([]);
+    const { authToken, setStatusCode } = useAuth();
     const [filteredData, setFilteredData] = useState([]);
     const [search, setSearch] = useState('');
     const [dropdownRowId, setDropdownRowId] = useState(null);
@@ -50,15 +50,18 @@ function Product () {
   
     const url1 = 'https://d153-102-89-23-118.ngrok-free.app/api/product/create';
     const url2 = 'https://d153-102-89-23-118.ngrok-free.app/api/product/category/3';
+    const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
   
 
     useEffect(() => {
       const fetchData = async () => {        
         try {
           const headers = {
+            'Authorization': `Bearer ${Atoken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': "69420",
             'origin': '*',
-            "Content-Type": "application/json",
-            'app-token': 'sdksd2o32usdf239djfnasojiuhrui2h3rjknweuh4ro8q2hrjwdbfoq274hrqo8e7rgsdbasdjkfnq8uerq948ri24jrdmnfau2q8h4r8oqwhrqwy8rg8oqg623ruqyhkasdjnbq3er2wurgwebsdnbq837y2egrub',
           };
 
           const [response1, response2] = await Promise.all([
@@ -72,7 +75,12 @@ function Product () {
               headers,
             }),
           ])
-          // const result = await response.json();
+
+          // setStatusCode(response.status);
+          
+          // if (!response.ok) {
+          //   throw new Error('Network response was not ok');
+          // }
           const result1 = await response1.json();
           const result2 = await response2.json();
 
@@ -91,7 +99,7 @@ function Product () {
       };
   
       fetchData();
-    }, []);
+    }, [Atoken, setStatusCode]);
 
     useEffect(() => {
         setLoading(true)

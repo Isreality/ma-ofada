@@ -6,6 +6,7 @@ import Heading from "../Components/Heading";
 import Card from "../Components/Card";
 import Reviews from "../Components/Reviews";
 import { useState, useEffect } from 'react';
+import { useAuth } from '../Components/AuthContext';
 import { FaUsers } from "react-icons/fa";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { FiBox } from "react-icons/fi";
@@ -16,6 +17,47 @@ import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(false);
+  const { authToken, setStatusCode } = useAuth();
+  const [stat, setStat] = useState([]);
+  const [error, setError] = useState(null);
+
+  const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
+  const endpoint = '/seller/dashboard/get-stats';
+  const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(BASE_URL + endpoint, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${Atoken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': "69420",
+            'origin': '*',
+          },
+        });
+
+        setStatusCode(response.status);
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const result = await response.json();
+        if (result.status) {
+          console.log(result);
+          setStat(result.data);
+        } else {
+          throw new Error('Data fetch unsuccessful');
+        }
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchData();
+  }, [Atoken, setStatusCode]);
   
 
   useEffect(() => {
@@ -50,18 +92,14 @@ const Dashboard = () => {
                 {/* Card */}
                 <div className=" grid lg:grid-cols-2 sm:grid-cols-1 px-8 gap-5 mb-4">
                   {/* <Card className="bg-primary text-white" title="Total Revenue" icons={<TbCurrencyNaira className="size-10 text-white bg-[#fefefe] p-2 rounded-full"/>} info="10M"/> */}
-                  <Card className="bg-primary text-white" title="Total Products" icons={<FiBox className="size-10 text-primary bg-white p-2 rounded-full"/>} info="5K"/>
-                  <Card title="Total Orders" icons={<RiListView className="size-10 text-white bg-pend p-2 rounded-full"/>} info="5K"/>
+                  <Card className="bg-primary text-white" title="Total Products" icons={<FiBox className="size-10 text-primary bg-white p-2 rounded-full"/>} info={stat.productCount}/>
+                  <Card title="Total Orders" icons={<RiListView className="size-10 text-white bg-pend p-2 rounded-full"/>} info={stat.ordersCount}/>
                 </div>
                 
                 {/* Reviews */}
                 <div className="px-8 items-left">
                   <div className="text-primary text-left text-xl font-semibold mb-2">Reviews</div>
                     <Reviews/>
-
-                  {/* <div className=" text-black2 text-md font-medium px-4">
-                    <Link to="/Order" className="flex flex-row cursor-pointer gap-1 items-center">See All<TbMathGreater/></Link>
-                  </div> */}
 
                 </div>
                 
