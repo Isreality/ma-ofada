@@ -118,8 +118,8 @@ useEffect(() => {
         setSuccessMessage('Sign-in successful.');
         setErrorMessage('')
         setIsModalOpen(true);
-        // console.log(response?.data);
-        // sessionStorage.getItem('data', JSON.stringify(response?.data))
+        console.log(data);
+        sessionStorage.setItem('data', JSON.stringify(data))
       }
 
       setTimeout(() => {
