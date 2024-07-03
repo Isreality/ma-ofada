@@ -166,7 +166,7 @@ useEffect(() => {
               {/* Email */}
               <label htmlFor="email" className='text-md md:text-xl text-left mb-8'>Email</label><br/>
               <input 
-                className='border-2 p-4 w-72 md:w-full rounded-md border-fa bg-fa focus:outline-primary focus:bg-fa' 
+                className='border-2 p-4 w-80 md:w-full rounded-md border-fa bg-fa focus:outline-primary focus:bg-fa' 
                 type='email' 
                 id = "email" 
                 placeholder='example@gmail.com'
@@ -180,7 +180,7 @@ useEffect(() => {
             <div className='space-y-2' style={{ position: 'relative' }}>
               <label htmlFor="pwd" className='text-md md:text-xl text-left mb-8'>Password</label><br/>
               <input 
-                className='border-2 p-6 w-72 md:w-full rounded-md border-fa bg-fa focus:bg-fa focus:outline-primary' 
+                className='border-2 p-6 w-80 md:w-full rounded-md border-fa bg-fa focus:bg-fa focus:outline-primary' 
                 type= {showPassword ? 'text' : 'password'}
                 id = "pwd" 
                 placeholder='Enter your password'
@@ -227,7 +227,7 @@ useEffect(() => {
             // disabled={loading} 
             className='w-full mt-4 py-4 px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'
             />  */}
-            <button type="submit" onClick = {handleSubmit} disabled={spin} className='w-72 md:w-full mt-4 py-4 px-20 md:px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'>
+            <button type="submit" onClick = {handleSubmit} disabled={spin} className='w-80 md:w-full mt-4 py-4 px-20 md:px-64 rounded-md border-fa bg-primary hover:bg-black cursor-pointer text-white text-xl font-bold'>
               {spin ? <div className="px-2 text-2xl"><FaSpinner className="animate-spin" /> </div> : 'Sign In'}
             </button>
           </form>
