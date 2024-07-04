@@ -2,17 +2,26 @@ import "../style.css";
 import Sidebar from "../Components/Sidebar";
 import Header from "../Components/Header";
 import Heading from "../Components/Heading";
+import OpenOrders from "../Components/OpenOrders";
 import { useState, useEffect } from 'react';
 import { RiFileList3Line } from "react-icons/ri";
+// import { useAuth } from '../Components/AuthContext';
 // import { Link } from 'react-router-dom';
 // import Skeleton from 'react-loading-skeleton';
 
 const Order = () => {
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('tab1');
+  // const { authToken, setStatusCode } = useAuth();
   // const [empty, setEmpty] = useState(true);
-  // const [tab1Data, setTab1Data] = useState(null);
-  // const [tab2Data, setTab2Data] = useState(null);
+  // const [data, setData] = useState([]);
+  const [tab1Data, setTab1Data] = useState(null);
+  const [tab2Data, setTab2Data] = useState(null);
+  const [error, setError] = useState(null);
+
+  // const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
+  // const endpoint = '/seller/dashboard/get-stats';
+  // const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -28,7 +37,34 @@ const Order = () => {
   // useEffect(() => {
   //   // Replace with your actual API endpoints
   //   const fetchTab1Data = async () => {
-  //     const response = await fetch('https://api.example.com/tab1');
+  //     try {
+  //       const response = await fetch(BASE_URL + endpoint, {
+  //         method: 'GET',
+  //         headers: {
+  //           'Authorization': `Bearer ${Atoken}`,
+  //           'Content-Type': 'application/json',
+  //           'Accept': 'application/json',
+  //           'ngrok-skip-browser-warning': "69420",
+  //           'origin': '*',
+  //         },
+  //       });
+
+  //       setStatusCode(response.status);
+
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       const result = await response.json();
+  //       if (result.status) {
+  //         // console.log(result);
+  //         setTab1Data(result.data);
+  //       } else {
+  //         throw new Error('Data fetch unsuccessful');
+  //       }
+  //     } catch (error) {
+  //       setError(error.message);
+  //     }
+  //     // const response = await fetch('https://api.example.com/tab1');
   //     const data = await response.json();
   //     setTab1Data(data);
   //   };
@@ -41,8 +77,8 @@ const Order = () => {
 
   //   fetchTab1Data();
   //   fetchTab2Data();
-  //   setLoading(false);
-  // }, []);
+  //   // setLoading(false);
+  // }, [Atoken, setStatusCode]);
 
     return ( 
         <div>
@@ -83,14 +119,15 @@ const Order = () => {
                       </button>
                     </div>
 
-                    <div className="p-4">
+                    <div className="px-0 py-4">
                       {/* OPen Orders */}
                       {activeTab === 'tab1' && 
-                        <div className="flex flex-col items-center justify-center h-64">
-                          <RiFileList3Line className="text-9xl text-c4"/>
-                           <p className="text-lg text-black2">No Orders Yet</p>
-                           <p className="text-sm text-black2">Order from buyers will appear here</p>
-                        </div>
+                        // <div className="flex flex-col items-center justify-center h-64">
+                        //   <RiFileList3Line className="text-9xl text-c4"/>
+                        //    <p className="text-lg text-black2">No Orders Yet</p>
+                        //    <p className="text-sm text-black2">Order from buyers will appear here</p>
+                        // </div>
+                        <OpenOrders/>
                       }
 
                       

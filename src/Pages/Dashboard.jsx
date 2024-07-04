@@ -46,7 +46,7 @@ const Dashboard = () => {
         }
         const result = await response.json();
         if (result.status) {
-          console.log(result);
+          // console.log(result);
           setStat(result.data);
         } else {
           throw new Error('Data fetch unsuccessful');

@@ -14,7 +14,7 @@ import { useAuth } from '../Components/AuthContext';
 
 function Product () {
     const [data, setData] = useState([]);
-    const { authToken, setStatusCode } = useAuth();
+    const { authToken, setStatusCode, fetchNewToken } = useAuth();
     const [filteredData, setFilteredData] = useState([]);
     const [search, setSearch] = useState('');
     const [dropdownRowId, setDropdownRowId] = useState(null);
@@ -48,58 +48,68 @@ function Product () {
       setShowModal(false);
     };
   
-    const url1 = 'https://d153-102-89-23-118.ngrok-free.app/api/product/create';
-    const url2 = 'https://d153-102-89-23-118.ngrok-free.app/api/product/category/3';
+    const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
+    const endpoints = [
+      '/product/4',
+      '/product/search?searchQuery=DISCOUNT_SALES&minPrice=&maxPrice=&ratings=&page=1&categoryId=',
+      '/product/keyword-search?searchQuery=Plastic Foldable',
+      '/product/category/3',
+      // '/seller/dashboard/get-stats5',
+      // '/seller/dashboard/get-stats6',
+    ];
     const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
   
-
     useEffect(() => {
-      const fetchData = async () => {        
+      const fetchData = async () => {
         try {
-          const headers = {
-            'Authorization': `Bearer ${Atoken}`,
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'ngrok-skip-browser-warning': "69420",
-            'origin': '*',
-          };
-
-          const [response1, response2] = await Promise.all([
-            fetch(url1, {
+          const fetchPromises = endpoints.map((endpoint) =>
+            fetch(BASE_URL + endpoint, {
               method: 'GET',
-              headers,
-            }),
-
-            fetch(url2, {
-              method: 'GET',
-              headers,
-            }),
-          ])
-
-          // setStatusCode(response.status);
-          
-          // if (!response.ok) {
-          //   throw new Error('Network response was not ok');
-          // }
-          const result1 = await response1.json();
-          const result2 = await response2.json();
-
-          if (result1.status && result2.status) {
-            const combinedData = [result1.data, ...result2.data];
-            setData(combinedData);
-            setFilteredData(combinedData);
+              headers: {
+                'Authorization': `Bearer ${Atoken}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'ngrok-skip-browser-warning': "69420",
+                'origin': '*',
+              },
+            })
+          );
+    
+          const responses = await Promise.all(fetchPromises);
+    
+          // Check for any unauthorized responses
+          const unauthorized = responses.find((response) => response.status === 401);
+    
+          if (unauthorized) {
+            // Token is invalid, refresh it
+            await fetchNewToken();
           } else {
-            console.error('Error fetching data:', result1.msg || result2.msg);
+            const results = await Promise.all(responses.map((response) => response.json()));
+    
+            // Collect data and status codes
+            const data = results.map((result, index) => {
+              setStatusCode(responses[index].status);
+              if (responses[index].ok && result.status) {
+                return result.data;
+              } else {
+                throw new Error('Data fetch unsuccessful');
+              }
+            });
+    
+            setData(data);
           }
-          // setData(result);
-          // setFilteredData(result);
         } catch (error) {
-          console.error('Error fetching data:', error);
+          setError(error.message);
         }
       };
-  
-      fetchData();
+    fetchData();
     }, [Atoken, setStatusCode]);
+  
+    // useEffect(() => {
+    //   if (authToken) {
+    //     fetchData(authToken);
+    //   }
+    // }, [Atoken, setStatusCode]);
 
     useEffect(() => {
         setLoading(true)
