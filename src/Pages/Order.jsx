@@ -135,12 +135,12 @@ const Order = () => {
                       
                       {/* Closed Orders */}
                       {activeTab === 'tab2' && 
-                        <div className="flex flex-col items-center justify-center h-64">
-                          <RiFileList3Line className="text-9xl text-c4"/>
-                          <p className="text-lg text-black2">No Orders Yet</p>
-                          <p className="text-sm text-black2">Order from buyers will appear here</p>
-                        </div>
-                        // <ClosedOrders/>
+                        // <div className="flex flex-col items-center justify-center h-64">
+                        //   <RiFileList3Line className="text-9xl text-c4"/>
+                        //   <p className="text-lg text-black2">No Orders Yet</p>
+                        //   <p className="text-sm text-black2">Order from buyers will appear here</p>
+                        // </div>
+                        <ClosedOrders/>
                       }
 
                       {/* {activeTab === 'tab1' && (
