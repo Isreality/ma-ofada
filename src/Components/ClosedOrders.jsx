@@ -8,7 +8,7 @@ const OpenOrders = () => {
   const [error, setError] = useState(null);
 
   const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
-  const endpoint = '/order/fetch-open-orders?page=1';
+  const endpoint = '/order/fetch-close-orders?page=1';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
   useEffect(() => {
@@ -50,14 +50,14 @@ const OpenOrders = () => {
       <div className="">
                 {data.map((open) => (
                     <div key={open.id} className="flex flex-row gap-5 items-center border-b border-disable p-4">
-                        <div><img src={open.product.imageUrl} alt="" className="h-10 w-10 md:h-16 md:w-16 rounded-md"/></div>
+                        <div><img src={open.product.imageUrl} alt="" className=" h-4 w-4 md:h-16 md:w-16 rounded-md"/></div>
                         <div className="">
-                            <h1 className="text-sm md:text-md text-left text-black2 font-medium">{open.product.name}</h1>
+                            <h1 className="text-md text-left text-black2 font-medium">{open.product.name}</h1>
                             <h1 className="text-sm text-left text-black2 font-normal">N{open.product.price}</h1>    
                         </div>
                     </div> 
                 ))}
-            </div><br/>
+       </div><br/>
     </div>
   );
 }

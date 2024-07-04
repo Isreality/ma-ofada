@@ -3,6 +3,7 @@ import Sidebar from "../Components/Sidebar";
 import Header from "../Components/Header";
 import Heading from "../Components/Heading";
 import OpenOrders from "../Components/OpenOrders";
+import ClosedOrders from "../Components/ClosedOrders";
 import { useState, useEffect } from 'react';
 import { RiFileList3Line } from "react-icons/ri";
 // import { useAuth } from '../Components/AuthContext';
@@ -96,12 +97,12 @@ const Order = () => {
               <div className="w-full">
                 <div className="mb-4 items-center"><Header title="Orders" link="/order"/></div>
                 
-                <div className="px-8">
+                <div className="px-4 md:px-8">
                   <div className="mb-4"><Heading title="Orders"/></div>
                 </div>
                 
                 {/* Body */}
-                <div className="border border-white md:border-disable rounded-md px-0 md:px-10 py-2  md:py-6 mx-8">
+                <div className="border border-white md:border-disable rounded-md px-0 md:px-10 py-2  md:py-6 mx-4 md:mx-8">
                     <div className="flex flex-row justify-between space-x-2 bg-fa rounded-md p-2">
                       {/* Tabs */}
                       <button
@@ -139,6 +140,7 @@ const Order = () => {
                           <p className="text-lg text-black2">No Orders Yet</p>
                           <p className="text-sm text-black2">Order from buyers will appear here</p>
                         </div>
+                        // <ClosedOrders/>
                       }
 
                       {/* {activeTab === 'tab1' && (
