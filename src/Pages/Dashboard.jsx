@@ -21,7 +21,7 @@ const Dashboard = () => {
   const [stat, setStat] = useState([]);
   const [error, setError] = useState(null);
 
-  const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
+  const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
   const endpoint = '/seller/dashboard/get-stats';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 

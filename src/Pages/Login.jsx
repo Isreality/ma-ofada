@@ -41,7 +41,7 @@ function Login() {
   const [spin, setSpin] = useState(null);
   const navigate = useNavigate();
 
-  const BASE_URL = 'https://d153-102-89-23-118.ngrok-free.app/api';
+  const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
   const endpoint = '/seller/sign-in';
 
 useEffect(() => {

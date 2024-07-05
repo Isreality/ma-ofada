@@ -2,13 +2,13 @@ import "../style.css";
 import { useAuth } from '../Components/AuthContext';
 import { useState, useEffect } from 'react';
 
-const OpenOrders = () => {
+const FetchProduct = () => {
   const { authToken, setStatusCode } = useAuth();
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
 
   const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
-  const endpoint = '/order/fetch-close-orders?page=1';
+  const endpoint = '/seller/product/fetch?minPrice=&maxPrice=&ratings=&page=1';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
   useEffect(() => {
@@ -50,16 +50,16 @@ const OpenOrders = () => {
       <div className="">
                 {data.map((open) => (
                     <div key={open.id} className="flex flex-row gap-5 items-center border-b border-disable p-4">
-                        <div><img src={open.product.imageUrl} alt="" className=" h-10 w-10 md:h-16 md:w-16 rounded-md"/></div>
+                        <div><img src={open.imageUrl} alt="" className="h-10 w-10 md:h-16 md:w-16 rounded-md"/></div>
                         <div className="">
-                            <h1 className="text-md text-left text-black2 font-medium">{open.product.name}</h1>
-                            <h1 className="text-sm text-left text-black2 font-normal">N{open.product.price}</h1>    
+                            <h1 className="text-sm md:text-md text-left text-black2 font-medium">{open.name}</h1>
+                            <h1 className="text-sm text-left text-black2 font-normal">N{open.price}</h1>    
                         </div>
                     </div> 
                 ))}
-       </div><br/>
+      </div>
     </div>
   );
 }
 
-export default OpenOrders;
+export default FetchProduct;
