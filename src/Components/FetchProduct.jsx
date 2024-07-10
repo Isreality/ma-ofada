@@ -119,7 +119,7 @@ const FetchProduct = () => {
     <div>
       <div className="">
             {/* Modal */}
-            <div className=" mb-4">
+            <div className="fixed top-4  w-3/4 mb-4">
               {isModalOpen && (
                 <Modal
                   message={errors || successMessage}
