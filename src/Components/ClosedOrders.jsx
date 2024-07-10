@@ -8,7 +8,7 @@ const OpenOrders = () => {
   const [error, setError] = useState(null);
 
   const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
-  const endpoint = '/order/fetch-close-orders?page=1';
+  const endpoint = '/seller/product/fetch-close-orders';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
   useEffect(() => {
