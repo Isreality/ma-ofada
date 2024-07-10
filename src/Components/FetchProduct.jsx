@@ -56,9 +56,9 @@ const FetchProduct = () => {
     fetchData();
   }, [Atoken, setStatusCode]);
 
-  const openModal = () => {
-    setShowModal(true);
-  };
+  // const openModal = () => {
+  //   setShowModal(true);
+  // };
 
   const closeModal = () => {
     setShowModal(false);
@@ -89,23 +89,23 @@ const FetchProduct = () => {
         body: JSON.stringify({ productId: productToDelete?.id }),
       });
 
-      // const data = await response.json();
+      const result = await response.json();
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
- 
+      } else{
+        setProducts(products.filter((product) => product.id !== productToDelete?.id));
+        setShowModal(false);
+        setSuccessMessage(`Product "${productToDelete?.name}" was successfully deleted.`);
+        setErrorMessage(``);
+        setIsModalOpen(true);
+        setProductToDelete(null);
+        // console.log('Delete Result:', result);
       }
-
-      const result = await response.json();
-      console.log('Delete Result:', result);
-
-      setProducts(products.filter((product) => product.id !== productToDelete?.id));
-      setShowModal(false);
-      setSuccessMessage(`Product "${productToDelete?.name}" was successfully deleted.`);
-      setProductToDelete(null);
 
       setTimeout(() => {
         setSuccessMessage('');
+        setIsModalOpen(false);
         // navigate('/product');
         window.location.reload();
       }, 3000);
