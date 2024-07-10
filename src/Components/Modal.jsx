@@ -10,8 +10,8 @@ function Modal ({ message, type, onClose }) {
   return (
     <div className={modalClasses}>
       <div className='flex flex-row gap-10'>
-        <img src={iconSrc} alt="" className={`p-4 absolute left-0 top-0 rounded-md ${iconColor}`}/>        
-        <div className='ml-12'>{message}</div> 
+        <img src={iconSrc} alt="" className={`p-4 h-auto absolute left-0 top-0 rounded-md ${iconColor}`}/>        
+        <div className='ml-12 text-md md:text-lg'>{message}</div> 
       </div>
 
       <button style={{ marginLeft: '470px', top: '10px', overflow: 'hidden'}} onClick={onClose} className='absolute text-black2 text-lg top-30 right-4 sm:overflow-hidden font-normal'>

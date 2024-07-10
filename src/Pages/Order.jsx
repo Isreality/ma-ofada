@@ -102,7 +102,7 @@ const Order = () => {
                 </div>
                 
                 {/* Body */}
-                <div className="border border-white md:border-disable rounded-md px-0 md:px-10 py-2  md:py-6 mx-4 md:mx-8">
+                <div className="border border-white md:border-disable rounded-md px-0 md:px-10 py-2 md:py-6 mx-4 md:mx-8">
                     <div className="flex flex-row justify-between space-x-2 bg-fa rounded-md p-2">
                       {/* Tabs */}
                       <button

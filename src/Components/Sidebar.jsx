@@ -20,7 +20,7 @@ const Sidebar = () => {
 
     const openModal = () => {
         setShowModal(true);
-        // setSide(false);
+        setSide(false);
     };
 
     const closeModal = () => {
@@ -97,12 +97,11 @@ const Sidebar = () => {
                                         <TbLogout className="h-5 w-5"/>
                                         <p>Logout</p>
                                     </button>
-                                    <Logout show={showModal} handleClose={closeModal}/>
+                                    {/* <Logout show={showModal} handleClose={closeModal}/> */}
                                 </div>
                             </div>
-
-                        
-                        )}      
+                        )} 
+                        <Logout show={showModal} handleClose={closeModal}/>     
                     </div>                  
                 </div>
             </div>

@@ -119,7 +119,7 @@ const FetchProduct = () => {
     <div>
       <div className="">
             {/* Modal */}
-            <div className="fixed top-4  w-3/4 mb-4">
+            <div className="fixed top-4 w-72 md:w-3/4 mb-4">
               {isModalOpen && (
                 <Modal
                   message={errors || successMessage}
@@ -131,7 +131,7 @@ const FetchProduct = () => {
             </div>
                 {data.map((product) => (
                     <div key={product.id} className="flex flex-row justify-between items-center border-b border-disable p-4">
-                      <div className="flex flex-row gap-5 items-center p-4">
+                      <div className="flex flex-row gap-5 items-center px-2 py-4">
                         <div><img src={product.imageUrl} alt="" className="h-10 w-10 md:h-16 md:w-16 rounded-md"/></div>
                         <div className="">
                             <h1 className="text-sm md:text-md text-left text-black2 font-medium">{product.name}</h1>
