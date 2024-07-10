@@ -83,22 +83,20 @@ const FetchProduct = () => {
         body: JSON.stringify({ productId: productToDelete?.id }),
       });
 
-      const data = await response.json();
+      // const data = await response.json();
 
       if (!response.ok) {
-        // throw new Error('Network response was not ok');
-        setProducts(products.filter((product) => product.id !== productToDelete?.id));
-        setShowModal(false);
-        setSuccessMessage(`Product "${productToDelete?.name}" was successfully deleted.`);
-        setProductToDelete(null);
-        console.log(data);
-        return;
+        throw new Error('Network response was not ok');
+
       }
 
-      // setProducts(products.filter((product) => product.id !== productToDelete?.id));
-      // setShowModal(false);
-      // setSuccessMessage(`Product "${productToDelete?.name}" was successfully deleted.`);
-      // setProductToDelete(null);
+      const result = await response.json();
+      console.log('Delete Result:', result);
+
+      setProducts(products.filter((product) => product.id !== productToDelete?.id));
+      setShowModal(false);
+      setSuccessMessage(`Product "${productToDelete?.name}" was successfully deleted.`);
+      setProductToDelete(null);
 
       setTimeout(() => {
         setSuccessMessage('');

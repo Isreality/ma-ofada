@@ -3,19 +3,7 @@ import { useState, useEffect } from 'react';
 // import { useNavigate } from 'react-router-dom';
 
 function Delete ({ show, handleClose, onConfirm,  header, body }) {
-    const [showModal, setShowModal] = useState(false);
-    const [productToDelete, setProductToDelete] = useState(null);
-    // const navigate = useNavigate(false);
-
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   handleClose();
-  // };
-
-//   const proceed = () => {
-//     setShowModal(false);
-//     // navigate('/'); 
-// };
+    if (!show) return null;
 
     return ( 
         <div>
