@@ -4,6 +4,7 @@ import Delete from '../Components/Delete';
 import Modal from '../Components/Modal';
 import { useState, useEffect } from 'react';
 import { HiOutlineTrash } from "react-icons/hi";
+// import { useNavigate } from 'react-router-dom';
 
 const FetchProduct = () => {
   const { authToken, setStatusCode } = useAuth();
@@ -15,6 +16,7 @@ const FetchProduct = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errors, setErrorMessage] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+  // const navigate = useNavigate();
 
   const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
   const endpoint = '/seller/product/fetch?minPrice=&maxPrice=&ratings=&page=1';
@@ -62,6 +64,10 @@ const FetchProduct = () => {
     setShowModal(false);
   };
 
+  const removeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const handleDelete = (product) => {
     setProductToDelete(product);
     setShowModal(true);
@@ -87,7 +93,7 @@ const FetchProduct = () => {
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
-
+ 
       }
 
       const result = await response.json();
@@ -100,6 +106,8 @@ const FetchProduct = () => {
 
       setTimeout(() => {
         setSuccessMessage('');
+        // navigate('/product');
+        window.location.reload();
       }, 3000);
     } catch (error) {
       setError(error.message);
@@ -116,7 +124,7 @@ const FetchProduct = () => {
                 <Modal
                   message={errors || successMessage}
                   type={errors ? 'error' : 'success'}
-                  onClose={closeModal}
+                  onClose={removeModal}
                   className=""
                 />
             )}
