@@ -17,7 +17,7 @@ function Delete ({ show, handleClose, onConfirm,  header, body }) {
                           &times;
                           </button>
 
-                          <h2 className="text-lg md:text-xl text-red text-center font-semibold mb-4">{header}</h2>
+                          <h2 className="text-lg md:text-xl text-red text-center font-bold mb-4">{header}</h2>
                                 <p className="mb-4 text-md md:text-lg text-center">{body}</p>
                                 <div className=" flex flex-col-reverse md:flex-row justify-items-stretch gap-4 mr-2">
                                     <button className="bg-disable text-black2 py-3 px-16 rounded-md" onClick={handleClose}>Cancel</button>

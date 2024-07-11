@@ -6,23 +6,26 @@ import { useState, useEffect } from 'react';
 import { HiOutlineTrash } from "react-icons/hi";
 // import { useNavigate } from 'react-router-dom';
 
-const FetchProduct = () => {
+const FetchProduct = ({searchQuery}) => {
   const { authToken, setStatusCode } = useAuth();
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
+   const [filteredProducts, setFilteredProducts] = useState([]);
   const [error, setError] = useState(null);
   const [productToDelete, setProductToDelete] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errors, setErrorMessage] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+  // const [searchQuery, setSearchQuery] = useState('');
   // const navigate = useNavigate();
 
   const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
   const endpoint = '/seller/product/fetch?minPrice=&maxPrice=&ratings=&page=1';
+  // const productSearchEndpoint = '/seller/product/search?searchQuery=cat fish&minPrice=&maxPrice=&ratings=&categoryId=';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
-  useEffect(() => {
+  // useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(BASE_URL + endpoint, {
@@ -53,8 +56,8 @@ const FetchProduct = () => {
       }
     };
 
-    fetchData();
-  }, [Atoken, setStatusCode]);
+  //   fetchData();
+  // }, [Atoken, setStatusCode]);
 
   // const openModal = () => {
   //   setShowModal(true);
@@ -67,6 +70,23 @@ const FetchProduct = () => {
   const removeModal = () => {
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    fetchData();
+  }, [Atoken, setStatusCode]);
+
+  useEffect(() => {
+    if (searchQuery) {
+      const lowercasedQuery = searchQuery.toLowerCase();
+      const filtered = products.filter(product => 
+        product.name.toLowerCase().includes(lowercasedQuery) ||
+        product.price.toString().includes(lowercasedQuery)
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [searchQuery, products]);
 
   const handleDelete = (product) => {
     setProductToDelete(product);
@@ -114,6 +134,41 @@ const FetchProduct = () => {
       setShowModal(false);
     }
   };
+
+  // const handleSearch = async (e) => {
+  //   const query = e.target.value.toLowerCase();
+  //   setSearchQuery(query);
+
+  //   if (query.trim() === '') {
+  //     // If the search query is empty, fetch all products
+  //     fetchData();
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await fetch(`${BASE_URL}${productSearchEndpoint}?q=${query}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         'Authorization': `Bearer ${Atoken}`,
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json',
+  //         'ngrok-skip-browser-warning': "69420",
+  //         'origin': '*',
+  //       },
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+
+  //     const result = await response.json();
+  //     console.log('Search Results:', result.data);
+  //     setProducts(result.data);
+  //   } catch (error) {
+  //     setError(error.message);
+  //     console.error('Search Error:', error);
+  //   }
+  // };
 
   return (
     <div>

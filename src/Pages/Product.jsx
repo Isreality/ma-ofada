@@ -7,6 +7,7 @@ import { SlSocialDropbox } from 'react-icons/sl';
 import { FaPlus } from "react-icons/fa6";
 import Sidebar from "../Components/Sidebar";
 import FetchProduct from "../Components/FetchProduct";
+import SearchProduct from "../Components/SearchProduct";
 import Header from "../Components/Header";
 import Heading from "../Components/Heading";
 import AddProduct from "../Components/AddProduct";
@@ -15,13 +16,16 @@ import { useAuth } from '../Components/AuthContext';
 
 function Product () {
     const [data, setData] = useState([]);
-    // const { authToken, setStatusCode } = useAuth();
+    const { authToken, setStatusCode } = useAuth();
     // const [search, setSearch] = useState('');
     // const [filteredData, setFilteredData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [empty, setEmpty] = useState(true);
     const [error, setError] = useState(false);
+    const [products, setProducts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    // const [searchResults, setSearchResults] = useState([]);
 
 
     const openModal = () => {
@@ -32,9 +36,10 @@ function Product () {
       setShowModal(false);
     };
   
-    const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
-    const endpoint = '/product/4';
-    const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
+    // const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
+    // const endpoint = '/product/4';
+    // const productSearchEndpoint = '/seller/product/search?searchQuery=cat fish&minPrice=&maxPrice=&ratings=&categoryId=';
+    // const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
 
     useEffect(() => {
@@ -43,6 +48,12 @@ function Product () {
             setLoading(false)
         }, 1000)
     }, [])
+
+    const handleSearch = (query) => {
+      setSearchQuery(query);
+    };
+
+    
 
     // const handleAction = (action, id) => {
     //     // Handle different actions here
@@ -85,15 +96,16 @@ function Product () {
                   <div className="flex flex-col lg:flex-row gap-3 items-left lg:items-center">
                       
                       {/* Search */}
-                      <div className="">
+                      <div><SearchProduct onSearch={handleSearch} /></div>
+                      {/* <div className="">
                             <input
                             type="text"
-                            placeholder="Search"
-                            // value={search}
-                            // onChange={handleSearch}
+                            placeholder="Search products..."
+                            value={searchQuery}
+                            onChange={(e) => handleSearch(e.target.value)}
                             className="w-full px-3 py-3 border rounded text-black2 focus:outline-disable"
                             />
-                      </div>
+                      </div> */}
 
                       {/* Add Product */}
                       <div>
@@ -104,7 +116,7 @@ function Product () {
                 </div>
 
                 <div className="border border-white md:border-disable rounded-md px-0 md:px-10 py-2  md:py-6 mx-4 md:mx-8">
-                    <FetchProduct/>
+                    <FetchProduct searchQuery={searchQuery}/>
                 </div>
                 
                 {/* Body */}

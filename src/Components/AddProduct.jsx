@@ -19,6 +19,7 @@ function AddProduct ({ show, handleClose }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [spin, setSpin] = useState(null);
+  const { categories, error } = FetchCategory();
   const { authToken, setStatusCode } = useAuth();
 
   const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
@@ -146,11 +147,11 @@ function AddProduct ({ show, handleClose }) {
                   onChange={(e) => setCategoryId(e.target.value)}
                   name="categoryId"
                 >
-                  <option value="" disabled>Select a category</option>
-                  {/* <FetchCategory/> */}
-                  <option value="3" className="p-4">3</option>
-                  {/* <option value="Meat" className="p-4">Meat</option>
-                  <option value="Egg" className="p-4">Egg</option>  */} 
+                  {categories.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))} 
                 </select>
 
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-black2">

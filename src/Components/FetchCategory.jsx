@@ -4,9 +4,8 @@ import { useState, useEffect } from 'react';
 
 const FetchCategory = () => {
   const { authToken, setStatusCode } = useAuth();
-  const [data, setData] = useState([]);
-  // const [categories, setCategories] = useState([]);
-
+  // const [data, setData] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
 
   const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
@@ -35,7 +34,7 @@ const FetchCategory = () => {
         const result = await response.json();
         if (result.status) {
           console.log(result);
-          setData(result.data);
+          setCategories(result.data);
         } else {
           throw new Error('Data fetch unsuccessful');
         }
@@ -47,20 +46,22 @@ const FetchCategory = () => {
     fetchData();
   }, [Atoken, setStatusCode]);
 
-  return (
-    <div>
-        <div className="">
-          {data.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-          {/* <option value="1">Category 1</option> */}
-          {/* <p>Category 1</p> */}
-        </div><br/>
+  // return (
+  //   <div>
+  //       <div className="">
+  //         {data.map((category) => (
+  //           <option key={category.id} value={category.name}>
+  //             {category.name}
+  //           </option>
+  //         ))}
+  //         {/* <option value="1">Category 1</option> */}
+  //         {/* <p>Category 1</p> */}
+  //       </div><br/>
 
-    </div>
-  );
+  //   </div>
+  // );
+
+  return { categories, error };
 }
 
 export default FetchCategory;
