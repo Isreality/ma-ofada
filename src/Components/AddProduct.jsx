@@ -21,6 +21,14 @@ function AddProduct ({ show, handleClose }) {
   const [spin, setSpin] = useState(null);
   const { categories, error } = FetchCategory();
   const { authToken, setStatusCode } = useAuth();
+//   const [formData, setFormData] = useState({
+//     name: '',
+//     desc: '',
+//     image: null,
+//     categoryId: '',
+//     numberOfAvailableStocks: '',
+//     price: ''
+// });
 
   const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
   const endpoint = '/seller/product/create';
@@ -30,6 +38,14 @@ function AddProduct ({ show, handleClose }) {
     const selectedImage = e.target.files[0];
     setImage(selectedImage);
   };
+
+  // const handleChange = (e) => {
+  //       const { name, value } = e.target;
+  //       setFormData({
+  //           ...formData,
+  //           [name]: value
+  //       });
+  //   };
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -63,6 +79,7 @@ function AddProduct ({ show, handleClose }) {
     }
 
     setSpin(true);
+    console.log(name, categoryId);
 
     const formData = new FormData();
     formData.append('categoryId', categoryId);
@@ -81,9 +98,12 @@ function AddProduct ({ show, handleClose }) {
           'Accept': 'application/json',
           'ngrok-skip-browser-warning': "69420",
           'origin': '*',
+          'Content-Type': 'multipart/form-data'
         },
         body: formData,
       });
+
+      // setStatusCode(response.status);
 
       if (!response.ok) {
         throw new Error('Data submission unsuccessful');

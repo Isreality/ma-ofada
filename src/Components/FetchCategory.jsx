@@ -46,21 +46,6 @@ const FetchCategory = () => {
     fetchData();
   }, [Atoken, setStatusCode]);
 
-  // return (
-  //   <div>
-  //       <div className="">
-  //         {data.map((category) => (
-  //           <option key={category.id} value={category.name}>
-  //             {category.name}
-  //           </option>
-  //         ))}
-  //         {/* <option value="1">Category 1</option> */}
-  //         {/* <p>Category 1</p> */}
-  //       </div><br/>
-
-  //   </div>
-  // );
-
   return { categories, error };
 }
 
