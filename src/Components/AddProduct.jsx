@@ -79,6 +79,13 @@ function AddProduct ({ show, handleClose }) {
       return;
     }
 
+    if (formData.desc.length < 100) {
+      setErrorMessage('Description must be at least 100 characters.');
+      setSuccessMessage('');
+      setIsModalOpen(true);
+      return;
+    }
+
     setSpin(true);
  
     const formPayload = new FormData();
