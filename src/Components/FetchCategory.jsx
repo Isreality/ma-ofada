@@ -33,7 +33,7 @@ const FetchCategory = () => {
         }
         const result = await response.json();
         if (result.status) {
-          console.log(result);
+          // console.log(result);
           setCategories(result.data);
         } else {
           throw new Error('Data fetch unsuccessful');
