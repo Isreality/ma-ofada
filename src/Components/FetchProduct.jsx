@@ -2,8 +2,12 @@ import "../style.css";
 import { useAuth } from '../Components/AuthContext';
 import Delete from '../Components/Delete';
 import Modal from '../Components/Modal';
+import EditProduct from '../Components/EditProduct';
 import { useState, useEffect } from 'react';
 import { HiOutlineTrash } from "react-icons/hi";
+import { BiSolidEdit } from "react-icons/bi";
+import { SlSocialDropbox } from "react-icons/sl";
+import ScaleLoader from "react-spinners/ScaleLoader";
 // import { useNavigate } from 'react-router-dom';
 
 const FetchProduct = ({searchQuery}) => {
@@ -14,9 +18,12 @@ const FetchProduct = ({searchQuery}) => {
   const [error, setError] = useState(null);
   const [productToDelete, setProductToDelete] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errors, setErrorMessage] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(true);
   // const [searchQuery, setSearchQuery] = useState('');
   // const navigate = useNavigate();
 
@@ -88,6 +95,16 @@ const FetchProduct = ({searchQuery}) => {
     }
   }, [searchQuery, products]);
 
+  // const handleEdit = (productId) => {
+  //   setSelectedProduct(productId);
+  //   setShowEditModal(true);
+  // };
+
+  // const closeEditModal = () => {
+  //   setShowEditModal(false);
+  //   setSelectedProduct(null);
+  // };
+
   const handleDelete = (product) => {
     setProductToDelete(product);
     setShowModal(true);
@@ -134,6 +151,36 @@ const FetchProduct = ({searchQuery}) => {
       setShowModal(false);
     }
   };
+
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+        setLoading(false)
+    }, 3000)
+  }, [])
+
+  if (loading) {
+    return (
+      <div>
+        <ScaleLoader
+          color={'#481986'}
+          loading={loading}
+          size={50}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> 
+      </div>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64">
+        <SlSocialDropbox className="text-9xl text-c4"/>
+        <p className="text-lg text-black2">No Product added</p>
+      </div>
+    );
+  }
 
   // const handleSearch = async (e) => {
   //   const query = e.target.value.toLowerCase();
@@ -194,12 +241,22 @@ const FetchProduct = ({searchQuery}) => {
                         </div>
                       </div>
 
-                      <button  onClick={() => handleDelete(product)} className="cursor-pointer ">
-                        <HiOutlineTrash className="text-red size-6 cursor-pointer" />
-                      </button>
+                      <div className="flex flex-row gap-2">
+                        {/* <button onClick={() => handleEdit(product.id)} className="cursor-pointer ">
+                          <BiSolidEdit className="text-success size-6 cursor-pointer" />
+                        </button> */}
+                        <button onClick={() => handleDelete(product)} className="cursor-pointer ">
+                          <HiOutlineTrash className="text-red size-6 cursor-pointer" />
+                        </button>
+                      </div>
                       
                     </div> 
                 ))}
+                {/* <EditProduct
+                  productId={selectedProduct}
+                  show={showEditModal}
+                  handleClose={closeEditModal}
+                /> */}
                 <Delete 
                   show={showModal} 
                   handleClose={closeModal} 

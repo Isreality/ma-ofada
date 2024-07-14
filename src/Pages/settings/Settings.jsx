@@ -10,6 +10,7 @@ import { MdPayments } from "react-icons/md";
 import { RxCaretRight } from "react-icons/rx";
 import { BiShieldQuarter } from "react-icons/bi";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import BeatLoader from "react-spinners/BeatLoader";
 import { Link } from 'react-router-dom';
 import {  useMatch } from 'react-router-dom';
 // import Skeleton from 'react-loading-skeleton';
@@ -35,7 +36,16 @@ const Settings = () => {
           {/* </Routes> */}
 
           {loading ? (
-            <p>Loading...</p>
+            <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+            <BeatLoader
+                color={'#481986'}
+                loading={loading}
+                // cssOverride={override}
+                size={50}
+                aria-label="Loading Spinner"
+                data-testid="loader"
+            /> 
+          </div>
           ) : (
             <div className="flex flex-row">
               {/* Sidebar */}

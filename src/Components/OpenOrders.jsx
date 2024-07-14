@@ -1,11 +1,14 @@
 import "../style.css";
 import { useAuth } from '../Components/AuthContext';
 import { useState, useEffect } from 'react';
+import { RiFileList3Line } from "react-icons/ri";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const OpenOrders = () => {
   const { authToken, setStatusCode } = useAuth();
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
   const endpoint = '/seller/product/fetch-open-orders';
@@ -44,6 +47,36 @@ const OpenOrders = () => {
 
     fetchData();
   }, [Atoken, setStatusCode]);
+
+  useEffect(() => {
+    setLoading(true)
+    setTimeout(() => {
+        setLoading(false)
+    }, 3000)
+  }, [])
+
+  if (loading) {
+    return (
+      <div>
+        <ScaleLoader
+          color={'#481986'}
+          loading={loading}
+          size={50}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        /> 
+      </div>
+    );
+  }
+
+  if (data.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-64">
+        <RiFileList3Line className="text-9xl text-c4"/>
+        <p className="text-lg text-black2">No Orders Yet</p>
+      </div>
+    );
+  }
 
   return (
     <div>

@@ -5,6 +5,7 @@ import Heading from "../Components/Heading";
 import OpenOrders from "../Components/OpenOrders";
 import ClosedOrders from "../Components/ClosedOrders";
 import { useState, useEffect } from 'react';
+import BeatLoader from "react-spinners/BeatLoader";
 import { RiFileList3Line } from "react-icons/ri";
 // import { useAuth } from '../Components/AuthContext';
 // import { Link } from 'react-router-dom';
@@ -85,7 +86,16 @@ const Order = () => {
         <div>
 
           {loading ? (
-            <p>Loading...</p>
+            <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+              <BeatLoader
+                  color={'#481986'}
+                  loading={loading}
+                  // cssOverride={override}
+                  size={50}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+              /> 
+            </div>
           ) : (
             <div className="flex flex-row">
               {/* Sidebar */}

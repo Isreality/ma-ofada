@@ -5,6 +5,7 @@ import { HiOutlineTrash } from "react-icons/hi";
 import { FaEllipsisV } from 'react-icons/fa';
 import { SlSocialDropbox } from 'react-icons/sl';
 import { FaPlus } from "react-icons/fa6";
+import BeatLoader from "react-spinners/BeatLoader";
 import Sidebar from "../Components/Sidebar";
 import FetchProduct from "../Components/FetchProduct";
 import SearchProduct from "../Components/SearchProduct";
@@ -79,7 +80,16 @@ function Product () {
         <div>
 
           {loading ? (
-            <p>Loading...</p>
+            <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+              <BeatLoader
+                  color={'#481986'}
+                  loading={loading}
+                  // cssOverride={override}
+                  size={50}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+              /> 
+            </div>
           ) : (
             <div className="flex flex-row">
               {/* Sidebar */}
