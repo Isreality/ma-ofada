@@ -53,7 +53,7 @@ const Reviews = () => {
     setLoading(true)
     setTimeout(() => {
         setLoading(false)
-    }, 1000)
+    }, 3000)
   }, [])
 
   if (loading) {
@@ -62,7 +62,7 @@ const Reviews = () => {
       // style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}
       >
               <ScaleLoader
-                  color={'#481986'}
+                  color={'#c4c4c4'}
                   loading={loading}
                   // cssOverride={override}
                   size={50}

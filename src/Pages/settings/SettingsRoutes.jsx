@@ -8,9 +8,9 @@ const SettingsRoutes = () => {
     return (
         <Routes>
             <Route index path="/" />
-            <Route path="profile" element={<ManageProfile />} />
+            {/* <Route path="profile" element={<ManageProfile />} /> */}
             <Route path="payment" element={<Payment />} />
-            <Route path="changepassword" element={<ChangePassword />} />
+            {/* <Route path="changepassword" element={<ChangePassword />} /> */}
         </Routes>
     );
   };

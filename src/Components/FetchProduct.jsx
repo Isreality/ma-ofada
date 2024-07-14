@@ -163,7 +163,7 @@ const FetchProduct = ({searchQuery}) => {
     return (
       <div>
         <ScaleLoader
-          color={'#481986'}
+          color={'#c4c4c4'}
           loading={loading}
           size={50}
           aria-label="Loading Spinner"

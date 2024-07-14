@@ -66,7 +66,7 @@ const Settings = () => {
                 <div className="gap-5 flex flex-col">
                     {/* Manage Profile */}
                     
-                    <Link to="profile" className="flex flex-row justify-between bg-fa p-4 lg:p-8 rounded-md cursor-pointer">
+                    {/* <Link to="profile" className="flex flex-row justify-between bg-fa p-4 lg:p-8 rounded-md cursor-pointer">
                         <div className="flex flex-row md:flex-row items-center text-md gap-2 text-black2">
                             <HiUser className="text-white font-xl size-10 bg-primary p-2 rounded-full"/>
                             <p className="text-black2 font-medium">Manage Profile</p>
@@ -75,7 +75,7 @@ const Settings = () => {
                         <div className="flex flex-row items-center sm:ml-96 gap-3">
                             <RxCaretRight className="text-black2 font-medium cursor-pointer size-5"/>
                         </div>
-                    </Link>
+                    </Link> */}
 
                     {/* Payment Details */}
                     <Link to="payment" className="flex flex-row justify-between bg-fa p-4 lg:p-8 rounded-md cursor-pointer">
@@ -90,7 +90,7 @@ const Settings = () => {
                     </Link>
 
                     {/* Change Password */}
-                    <Link to="changepassword" className="flex flex-row justify-between bg-fa p-4 lg:p-8 rounded-md cursor-pointer">
+                    {/* <Link to="changepassword" className="flex flex-row justify-between bg-fa p-4 lg:p-8 rounded-md cursor-pointer">
                         <div className="flex flex-row items-center text-md gap-2 text-black2">
                             <BiShieldQuarter className="text-white font-xl size-10 bg-primary p-2 rounded-full"/>
                             <p className="text-black2 font-medium">Change Password</p>
@@ -99,10 +99,10 @@ const Settings = () => {
                         <div className="flex flex-row items-center sm:ml-96 gap-3">
                             <RxCaretRight className="text-black2 font-medium cursor-pointer size-5"/>
                         </div>
-                    </Link>
+                    </Link> */}
 
                     {/* Delete Account */}
-                    <div className="flex flex-row justify-between bg-fa p-4 lg:p-8 rounded-md cursor-pointer">
+                    {/* <div className="flex flex-row justify-between bg-fa p-4 lg:p-8 rounded-md cursor-pointer">
                         <div className="flex flex-row items-center text-md gap-2 text-black2">
                             <RiDeleteBin5Fill className="text-white font-xl size-10 bg-primary p-2 rounded-full"/>
                             <p className="text-black2 font-medium">Delete Account</p>
@@ -111,7 +111,7 @@ const Settings = () => {
                         <div className="flex flex-row items-center sm:ml-96 gap-3">
                             <RxCaretRight className="text-black2 font-medium cursor-pointer size-5"/>
                         </div>
-                    </div>
+                    </div> */}
                 </div>  
 
                 </div>
