@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../Components/AuthContext';
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { FiStar } from "react-icons/fi";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 
 const Reviews = () => {
@@ -56,6 +57,24 @@ const Reviews = () => {
     }, 3000)
   }, [])
 
+  // const renderStars = (rating) => {
+  //   const filledStars = Array(rating).fill(<FaStar className="text-pend text-lg" />);
+  //   const unfilledStars = Array(5 - rating).fill(<FaRegStar className="text-c4 text-lg" />);
+  //   return [...filledStars, ...unfilledStars];
+  // };
+
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (i < rating) {
+        stars.push(<FaStar key={i} className="text-pend text-lg" />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-c4 text-lg" />);
+      }
+    }
+    return stars;
+  };
+
   if (loading) {
     return (
       <div 
@@ -90,7 +109,11 @@ const Reviews = () => {
                 {rating.map((rate) => (
                     <div key={rate.id} className="flex flex-col bg-fa rounded-md text-black2 gap-1 p-6">
                           <h1 className="text-left text-primary text-md font-bold">{rate.user.fullname}</h1>
-                          <div className="text-xs text-left">{rate.rating}</div>
+                          <div className="flex text-xs text-left gap-1">
+                            {renderStars(rate.rating).map((star, index) => (
+                              <div key={index}>{star}</div>
+                            ))}
+                          </div>
                           <h1 className="text-sm text-left text-black2">{rate.review}</h1>
                     </div> 
                 ))}
