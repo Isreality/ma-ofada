@@ -93,7 +93,6 @@ const ChangePassword = () => {
                 </div>
                 
                 {/* Body */}
-                {/* Card */}
                 <div className="border border-white md:border-disable rounded-md px-0 md:px-10 py-2 md:py-8 mx-8">
                   <div className="mb-4">
                     {isModalOpen && (
