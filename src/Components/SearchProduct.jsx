@@ -4,11 +4,16 @@ import { useState, useEffect } from 'react';
 function SearchProduct({ onSearch }) {
   const [query, setQuery] = useState('');
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      onSearch(query);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    onSearch(query);
   };
+
+  // const handleKeyDown = (e) => {
+  //   if (e.key === 'Enter') {
+  //     onSearch(query);
+  //   }
+  // };
 
   // const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
   // const searchEndpoint = '/seller/product/search?searchQuery=cat fish&minPrice=&maxPrice=&ratings=&categoryId=';
@@ -49,14 +54,16 @@ function SearchProduct({ onSearch }) {
   // };
 
   return (
-    <input
-      type="text"
-      value={query}
-      onChange={e => setQuery(e.target.value)}
-      onKeyDown={handleKeyDown}
-      placeholder="Search for a product..."
-      className="w-full px-3 py-3 border rounded text-black2 focus:outline-disable"
-    />
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={query}
+        onChange={e => setQuery(e.target.value)}
+        // onKeyDown={handleKeyDown}
+        placeholder="Search for a product..."
+        className="w-full px-3 py-3 border rounded text-black2 focus:outline-disable"
+      />
+    </form>
   );
 }
 
