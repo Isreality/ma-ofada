@@ -10,7 +10,7 @@ import { SlSocialDropbox } from "react-icons/sl";
 import ScaleLoader from "react-spinners/ScaleLoader";
 // import { useNavigate } from 'react-router-dom';
 
-const FetchProduct = ({searchQuery}) => {
+const FetchProduct = () => {
   const { authToken, setStatusCode } = useAuth();
   const [data, setData] = useState([]);
   const [products, setProducts] = useState([]);
@@ -82,18 +82,18 @@ const FetchProduct = ({searchQuery}) => {
     fetchData();
   }, [Atoken, setStatusCode]);
 
-  useEffect(() => {
-    if (searchQuery) {
-      const lowercasedQuery = searchQuery.toLowerCase();
-      const filtered = products.filter(product => 
-        product.name.toLowerCase().includes(lowercasedQuery) ||
-        product.price.toString().includes(lowercasedQuery)
-      );
-      setFilteredProducts(filtered);
-    } else {
-      setFilteredProducts(products);
-    }
-  }, [searchQuery, products]);
+  // useEffect(() => {
+  //   if (searchQuery) {
+  //     const lowercasedQuery = searchQuery.toLowerCase();
+  //     const filtered = products.filter(product => 
+  //       product.name.toLowerCase().includes(lowercasedQuery) ||
+  //       product.price.toString().includes(lowercasedQuery)
+  //     );
+  //     setFilteredProducts(filtered);
+  //   } else {
+  //     setFilteredProducts(products);
+  //   }
+  // }, [searchQuery, products]);
 
   // const handleEdit = (productId) => {
   //   setSelectedProduct(productId);

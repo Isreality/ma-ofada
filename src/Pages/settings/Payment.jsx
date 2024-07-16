@@ -2,9 +2,11 @@ import "../../style.css";
 import Sidebar from "../../Components/Sidebar";
 import Header from "../../Components/Header";
 import Heading from "../../Components/Heading";
+import FetchBanks from "../../Components/FetchBanks";
 import { useState, useEffect } from 'react';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaSpinner } from 'react-icons/fa';
+// import { useAuth } from '../Components/AuthContext';
 // import { Link } from 'react-router-dom';
 // import Skeleton from 'react-loading-skeleton';
 
@@ -14,6 +16,7 @@ const Payment = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [spin, setSpin] = useState(null);
+  const { banks, error } = FetchBanks();
   // const { authToken, setStatusCode } = useAuth();
   const [formData, setFormData] = useState({
     name: '',
@@ -68,11 +71,11 @@ const Payment = () => {
                           onChange={handleChange}
                           name="name"
                         >
-                          {/* {categories.map((category) => (
-                            <option key={category.id} value={category.id}>
-                              {category.name}
+                          {banks.map((bank) => (
+                            <option key={bank.id} value={bank.id}>
+                              {bank.name}
                             </option>
-                          ))}  */}
+                          ))} 
                         </select>
 
                         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-black2">

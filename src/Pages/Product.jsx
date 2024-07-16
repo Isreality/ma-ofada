@@ -28,6 +28,10 @@ function Product () {
     const [searchQuery, setSearchQuery] = useState('');
     // const [searchResults, setSearchResults] = useState([]);
 
+    const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
+    const searchEndpoint = '/seller/product/search?searchQuery=cat fish&minPrice=&maxPrice=&ratings=&categoryId=';
+    const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
+
 
     const openModal = () => {
       setShowModal(true);
@@ -50,10 +54,36 @@ function Product () {
         }, 1000)
     }, [])
 
-    const handleSearch = (query) => {
-      setSearchQuery(query);
+    // const handleSearch = (query) => {
+    //   setSearchQuery(query);
+    // };
+    
+    const handleSearch = async (query) => {
+      try {
+        const response = await fetch(BASE_URL + searchEndpoint, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${Atoken}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'ngrok-skip-browser-warning': "69420",
+            'origin': '*',
+          },
+        });
+  
+      //   setStatusCode(response.status);
+  
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+  
+        const result = await response.json();
+        setData(result.data);
+      } catch (error) {
+        console.error('Error fetching search results:', error.message);
+        // onSearch([]); 
+      }
     };
-
     
 
     // const handleAction = (action, id) => {
@@ -126,7 +156,7 @@ function Product () {
                 </div>
 
                 <div className="border border-white md:border-disable rounded-md px-0 md:px-10 py-2  md:py-6 mx-4 md:mx-8">
-                    <FetchProduct searchQuery={searchQuery}/>
+                    <FetchProduct />
                 </div>
                 
                 {/* Body */}
