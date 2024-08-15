@@ -24,7 +24,7 @@ function AddProduct ({ show, handleClose }) {
     price: ''
   });
 
-  const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
+  const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
   const endpoint = '/seller/product/create';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 

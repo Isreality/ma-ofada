@@ -27,7 +27,7 @@ const FetchProduct = () => {
   // const [searchQuery, setSearchQuery] = useState('');
   // const navigate = useNavigate();
 
-  const BASE_URL = 'https://c0ed-102-89-34-235.ngrok-free.app/api';
+  const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
   const endpoint = '/seller/product/fetch?minPrice=&maxPrice=&ratings=&page=1';
   // const productSearchEndpoint = '/seller/product/search?searchQuery=cat fish&minPrice=&maxPrice=&ratings=&categoryId=';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
