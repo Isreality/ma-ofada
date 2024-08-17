@@ -7,6 +7,8 @@ import FetchCategory from "../Components/FetchCategory";
 import { Link } from 'react-router-dom';
 import { FaSpinner } from 'react-icons/fa';
 import { useAuth } from '../Components/AuthContext';
+import Slider from '@mui/material/Slider';
+// import Typography from '@mui/material/Typography';
 
 function AddProduct ({ show, handleClose }) {
   const [errors, setErrorMessage] = useState({});
@@ -15,26 +17,52 @@ function AddProduct ({ show, handleClose }) {
   const [spin, setSpin] = useState(null);
   const { categories, error } = FetchCategory();
   const { authToken, setStatusCode } = useAuth();
+  // const [value, setValue] = useState(30);
   const [formData, setFormData] = useState({
-    name: '',
-    desc: '',
-    image: null,
+    // name: '',
+    // desc: '',
+    // image: null,
     categoryId: '',
+    weight: '',
     numberOfAvailableStocks: '',
-    price: ''
+    price: '',
+    dayOfHarvest: ''
   });
+
+  const marks = [
+    {
+      value: 0,
+      label: '0',
+    },
+    // {
+    //   value: 1,
+    //   label: '1kg',
+    // },
+    // {
+    //   value: 1.5,
+    //   label: '1.5kg',
+    // },
+    // {
+    //   value: 2.5,
+    //   label: '2.5kg',
+    // },
+    {
+      value: 3,
+      label: '3kg',
+    },
+  ];
 
   const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
   const endpoint = '/seller/product/create';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
 
-  const handleImageChange = (e) => {
-    setFormData({
-        ...formData,
-        image: e.target.files[0]
-    });
-  };
+  // const handleImageChange = (e) => {
+  //   setFormData({
+  //       ...formData,
+  //       image: e.target.files[0]
+  //   });
+  // };
 
   const handleChange = (e) => {
         const { name, value } = e.target;
@@ -44,17 +72,18 @@ function AddProduct ({ show, handleClose }) {
         });
   };
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setFormData({
-      ...formData,
-      image: e.dataTransfer.files[0]
-    });
-  };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  // const handleDrop = (e) => {
+  //   e.preventDefault();
+  //   setFormData({
+  //     ...formData,
+  //     image: e.dataTransfer.files[0]
+  //   });
+  // };
+
+  // const handleDragOver = (e) => {
+  //   e.preventDefault();
+  // };
 
   // const handleRemoveImage = (e) => {
   //   // setImage(null);
@@ -72,29 +101,31 @@ function AddProduct ({ show, handleClose }) {
   const handleSubmit = async (e) => { 
     e.preventDefault();
 
-    if (!formData.categoryId || !formData.name || !formData.desc || !formData.image || !formData.price || !formData.numberOfAvailableStocks) {
+    // if (!formData.categoryId || !formData.name || !formData.desc || !formData.image || !formData.price || !formData.numberOfAvailableStocks) {
+      if (!formData.categoryId || !formData.weight || !formData.price || !formData.numberOfAvailableStocks || !formData.dayOfHarvest) {
       setErrorMessage('All fields are required.');
       setSuccessMessage('');
       setIsModalOpen(true);
       return;
     }
 
-    if (formData.desc.length < 100) {
-      setErrorMessage('Description must be at least 100 characters.');
-      setSuccessMessage('');
-      setIsModalOpen(true);
-      return;
-    }
+    // if (formData.desc.length < 100) {
+    //   setErrorMessage('Description must be at least 100 characters.');
+    //   setSuccessMessage('');
+    //   setIsModalOpen(true);
+    //   return;
+    // }
 
     setSpin(true);
  
     const formPayload = new FormData();
-        formPayload.append('name', formData.name);
-        formPayload.append('desc', formData.desc);
-        formPayload.append('image', formData.image);
+        // formPayload.append('name', formData.name);
+        // formPayload.append('desc', formData.desc);
+        // formPayload.append('image', formData.image);
         formPayload.append('categoryId', formData.categoryId);
         formPayload.append('numberOfAvailableStocks', formData.numberOfAvailableStocks);
         formPayload.append('price', formData.price);
+        formPayload.append('dayOfHarvest', formData.dayOfHarvest);
 
     try {
       const response = await fetch(BASE_URL + endpoint, {
@@ -154,6 +185,9 @@ function AddProduct ({ show, handleClose }) {
               )}
             </div>
 
+             {/* Heading */} 
+            <h1 className="text-primary text-2xl font-bold">Add Product</h1>
+
             {/* Form */}
             <form onSubmit={handleSubmit} className='space-y-4'>
               {/* Category */}
@@ -180,7 +214,7 @@ function AddProduct ({ show, handleClose }) {
               </div>
 
               {/* Name */}
-              <div className='space-y-1 md:space-y-2 items-start text-left'>
+              {/* <div className='space-y-1 md:space-y-2 items-start text-left'>
                 <label htmlFor="name" className='text-md text-black2'>Product Name</label><br/>
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
@@ -191,10 +225,10 @@ function AddProduct ({ show, handleClose }) {
                   name="name"
                 />
                 {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}<br/>
-              </div>
+              </div> */}
 
               {/* Description */}
-              <div className='space-y-2 text-left'>
+              {/* <div className='space-y-2 text-left'>
                 <label htmlFor="desc" className='text-md text-left text-black2'>Description</label><br/>
                 <textarea 
                   className='border p-4 w-full h-32 rounded-md border-disable bg-white focus:outline-disable text-black2' 
@@ -204,13 +238,13 @@ function AddProduct ({ show, handleClose }) {
                   name="desc"
                 />
                 {errors.desc && <span style={{ color: 'red' }}>{errors.desc}</span>}<br/>
-              </div>
+              </div> */}
 
               {/* Image */}
-              <div className='space-y-2 text-left mb-4'>
-                <label htmlFor="image" className='text-md text-left text-black2'>Upload Image</label><br/>
-                {formData.image ? (
-                  <div style={{ display: 'inline-block' }}>
+              {/* <div className='space-y-2 text-left mb-4'>
+                <label htmlFor="image" className='text-md text-left text-black2'>Upload Image</label><br/> */}
+                {/* {formData.image ? ( */}
+                  {/* <div style={{ display: 'inline-block' }}>
                     <img
                       src={URL.createObjectURL(formData.image)}
                       alt="Selected Image"
@@ -231,17 +265,17 @@ function AddProduct ({ show, handleClose }) {
                         onChange={handleImageChange}
                       >
                         Change Image
-                      </label>
+                      </label> */}
                       {/* <button 
                         className="text-black2 bg-disable px-4 py-2 rounded-md" 
                         onClick={handleRemoveImage}
                       >
                         Remove Image
                       </button> */}
-                    </div>
-                  </div>
-                ) : (
-                  <div
+                    {/* </div>
+                  </div> */}
+                {/* ) : ( */}
+                  {/* <div
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     style={{
@@ -251,21 +285,30 @@ function AddProduct ({ show, handleClose }) {
                       textAlign: 'center',
                       cursor: 'pointer',
                     }}
-                  >
-                    <input
+                  > */}
+                    {/* <input
                       type="file"
                       accept=".jpg, .png"
                       onChange={handleImageChange}
                       style={{ display: 'none' }}
                       id="imageInput"
-                    />
-                    <label htmlFor="imageInput" className="text-black2" style={{ cursor: 'pointer' }}>
+                    /> */}
+                    {/* <label htmlFor="imageInput" className="text-black2" style={{ cursor: 'pointer' }}>
                       <div className="grid justify-items-center"><LiaImage className="text-c4 size-32"/></div>
                       Drag and drop files, or <b className="text-primary">Browse</b><br/>
                       <p className="text-xs">JPG, PNG - Max file size (10MB)</p>
                     </label>
-                  </div>
-                )}
+                  </div> */}
+                {/* )} */}
+              {/* </div> */}
+
+              {/* Weight */}
+              <div className='space-y-2 text-left'>
+                <label htmlFor="price" className='text-md text-left text-black2'>Weight</label><br/> 
+              
+                <Slider style={{ color: '#481986' }} defaultValue={0} valueLabelDisplay="on" step={0.5} marks={marks} min={0} max={3}/>
+                {/* <Slider style={{ color: '#481986' }} defaultValue={0} aria-label="Default" valueLabelDisplay="auto" /> */}
+                {errors.weight && <span style={{ color: 'red' }}>{errors.weight}</span>}<br/>
               </div>
 
               {/* Price */}
@@ -296,6 +339,21 @@ function AddProduct ({ show, handleClose }) {
                   // onChange={(e) => setNumberOfAvailableStocks(e.target.value)}
                 />
                 {errors.numberOfAvailableStocks && <span style={{ color: 'red' }}>{errors.numberOfAvailableStocks}</span>}<br/>
+              </div>
+
+              {/* Day of Harvest */}
+              <div className='space-y-2 text-left'>
+                <label htmlFor="dayOfHarvest" className='text-md text-left text-black2'>Estimated Day of Harvest</label><br/>
+                <input 
+                  className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
+                  type='text' 
+                  id="dayOfHarvest" 
+                  value={formData.dayOfHarvest}
+                  onChange={handleChange}
+                  name="dayOfHarvest"
+                  // onChange={(e) => setNumberOfAvailableStocks(e.target.value)}
+                />
+                {errors.dayOfHarvest && <span style={{ color: 'red' }}>{errors.dayOfHarvest}</span>}<br/>
               </div>
 
               {/* Submit Button */}
