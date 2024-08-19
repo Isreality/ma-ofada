@@ -7,7 +7,8 @@ import FetchCategory from "../Components/FetchCategory";
 import { Link } from 'react-router-dom';
 import { FaSpinner } from 'react-icons/fa';
 import { useAuth } from '../Components/AuthContext';
-import Slider from '@mui/material/Slider';
+// import Slider from '@mui/material/Slider';
+// import Calendar from 'react-calendar';
 // import Typography from '@mui/material/Typography';
 
 function AddProduct ({ show, handleClose }) {
@@ -17,6 +18,7 @@ function AddProduct ({ show, handleClose }) {
   const [spin, setSpin] = useState(null);
   const { categories, error } = FetchCategory();
   const { authToken, setStatusCode } = useAuth();
+  // const [value, onChange] = useState<Value>(new Date());
   // const [value, setValue] = useState(30);
   const [formData, setFormData] = useState({
     // name: '',
@@ -26,7 +28,7 @@ function AddProduct ({ show, handleClose }) {
     weight: '',
     numberOfAvailableStocks: '',
     price: '',
-    dayOfHarvest: ''
+    dateOfHarvest: ''
   });
 
   const marks = [
@@ -34,18 +36,6 @@ function AddProduct ({ show, handleClose }) {
       value: 0,
       label: '0',
     },
-    // {
-    //   value: 1,
-    //   label: '1kg',
-    // },
-    // {
-    //   value: 1.5,
-    //   label: '1.5kg',
-    // },
-    // {
-    //   value: 2.5,
-    //   label: '2.5kg',
-    // },
     {
       value: 3,
       label: '3kg',
@@ -53,7 +43,7 @@ function AddProduct ({ show, handleClose }) {
   ];
 
   const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
-  const endpoint = '/seller/product/create';
+  const endpoint = '/seller/product/create-category-product';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
 
@@ -102,7 +92,7 @@ function AddProduct ({ show, handleClose }) {
     e.preventDefault();
 
     // if (!formData.categoryId || !formData.name || !formData.desc || !formData.image || !formData.price || !formData.numberOfAvailableStocks) {
-      if (!formData.categoryId || !formData.weight || !formData.price || !formData.numberOfAvailableStocks || !formData.dayOfHarvest) {
+      if (!formData.categoryId || !formData.weight || !formData.price || !formData.numberOfAvailableStocks || !formData.dateOfHarvest) {
       setErrorMessage('All fields are required.');
       setSuccessMessage('');
       setIsModalOpen(true);
@@ -123,9 +113,10 @@ function AddProduct ({ show, handleClose }) {
         // formPayload.append('desc', formData.desc);
         // formPayload.append('image', formData.image);
         formPayload.append('categoryId', formData.categoryId);
+        formPayload.append('weight', formData.weight);
         formPayload.append('numberOfAvailableStocks', formData.numberOfAvailableStocks);
         formPayload.append('price', formData.price);
-        formPayload.append('dayOfHarvest', formData.dayOfHarvest);
+        formPayload.append('dayOfHarvest', formData.dateOfHarvest);
 
     try {
       const response = await fetch(BASE_URL + endpoint, {
@@ -305,9 +296,16 @@ function AddProduct ({ show, handleClose }) {
               {/* Weight */}
               <div className='space-y-2 text-left'>
                 <label htmlFor="price" className='text-md text-left text-black2'>Weight</label><br/> 
-              
-                <Slider style={{ color: '#481986' }} defaultValue={0} valueLabelDisplay="on" step={0.5} marks={marks} min={0} max={3}/>
-                {/* <Slider style={{ color: '#481986' }} defaultValue={0} aria-label="Default" valueLabelDisplay="auto" /> */}
+                <input 
+                  className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black' 
+                  type='text' 
+                  id="weight" 
+                  value={formData.weight}
+                  onChange={handleChange}
+                  placeholder=""
+                  name="weight"
+                />
+                {/* <Slider style={{ color: '#481986' }} defaultValue={0} valueLabelDisplay="on" step={0.5} marks={marks} min={0} max={3}/> */}
                 {errors.weight && <span style={{ color: 'red' }}>{errors.weight}</span>}<br/>
               </div>
 
@@ -343,17 +341,17 @@ function AddProduct ({ show, handleClose }) {
 
               {/* Day of Harvest */}
               <div className='space-y-2 text-left'>
-                <label htmlFor="dayOfHarvest" className='text-md text-left text-black2'>Estimated Day of Harvest</label><br/>
+                <label htmlFor="dateOfHarvest" className='text-md text-left text-black2'>Estimated Day of Harvest</label><br/>
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
                   type='text' 
                   id="dayOfHarvest" 
-                  value={formData.dayOfHarvest}
+                  value={formData.dateOfHarvest}
                   onChange={handleChange}
-                  name="dayOfHarvest"
+                  name="dateOfHarvest"
                   // onChange={(e) => setNumberOfAvailableStocks(e.target.value)}
                 />
-                {errors.dayOfHarvest && <span style={{ color: 'red' }}>{errors.dayOfHarvest}</span>}<br/>
+                {errors.dateOfHarvest && <span style={{ color: 'red' }}>{errors.dateOfHarvest}</span>}<br/>
               </div>
 
               {/* Submit Button */}

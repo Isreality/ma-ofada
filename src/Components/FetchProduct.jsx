@@ -27,15 +27,14 @@ const FetchProduct = () => {
   // const [searchQuery, setSearchQuery] = useState('');
   // const navigate = useNavigate();
 
-  const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
+  const baseURL = process.env.REACT_APP_BASE_URL;
   const endpoint = '/seller/product/fetch?minPrice=&maxPrice=&ratings=&page=1';
-  // const productSearchEndpoint = '/seller/product/search?searchQuery=cat fish&minPrice=&maxPrice=&ratings=&categoryId=';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
   // useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(BASE_URL + endpoint, {
+        const response = await fetch(baseURL + endpoint, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${Atoken}`,
@@ -114,7 +113,7 @@ const FetchProduct = () => {
     if (!productToDelete) return;
 
     try {
-      const response = await fetch(`${BASE_URL}/seller/product/delete`, {
+      const response = await fetch(`${baseURL}/seller/product/delete`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${Atoken}`,

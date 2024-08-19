@@ -22,14 +22,14 @@ const Dashboard = () => {
   const [stat, setStat] = useState([]);
   const [error, setError] = useState(null);
 
-  const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
+  const baseURL = process.env.REACT_APP_BASE_URL;
   const endpoint = '/seller/dashboard/get-stats';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(BASE_URL + endpoint, {
+        const response = await fetch(baseURL + endpoint, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${Atoken}`,

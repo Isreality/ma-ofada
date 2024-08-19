@@ -28,7 +28,7 @@ function Product () {
     const [searchQuery, setSearchQuery] = useState('');
     // const [searchResults, setSearchResults] = useState([]);
 
-    const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
+    const baseURL = process.env.REACT_APP_BASE_URL;
     const searchEndpoint = '/seller/product/search?searchQuery=cat fish&minPrice=&maxPrice=&ratings=&categoryId=';
     const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
@@ -60,7 +60,7 @@ function Product () {
     
     const handleSearch = async (query) => {
       try {
-        const response = await fetch(BASE_URL + searchEndpoint, {
+        const response = await fetch(baseURL + searchEndpoint, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${Atoken}`,

@@ -23,7 +23,7 @@ function EditProduct({ productId, show, handleClose }) {
     const { categories, error } = FetchCategory();
     const { authToken, setStatusCode } = useAuth();
     
-    const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
+    const baseURL = process.env.REACT_APP_BASE_URL;
     const fetchEndpoint = '/seller/product/fetch?minPrice=&maxPrice=&ratings=&page=1/';
     // const editEndpoint = '/seller/product/edit';
     const endpoint = '/seller/product/edit';
@@ -32,7 +32,7 @@ function EditProduct({ productId, show, handleClose }) {
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                const response = await fetch(`${BASE_URL}${fetchEndpoint}${productId}`, {
+                const response = await fetch(`${baseURL}${fetchEndpoint}${productId}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${Atoken}`,
@@ -156,7 +156,7 @@ function EditProduct({ productId, show, handleClose }) {
         formPayload.append('price', formData.price);
 
         try {
-            const response = await fetch(BASE_URL + endpoint, {
+            const response = await fetch(baseURL + endpoint, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${Atoken}`,

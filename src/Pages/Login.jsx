@@ -41,7 +41,7 @@ function Login() {
   const [spin, setSpin] = useState(null);
   const navigate = useNavigate();
 
-  const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
+  const baseURL = process.env.REACT_APP_BASE_URL;
   const endpoint = '/seller/sign-in';
 
 useEffect(() => {
@@ -90,7 +90,7 @@ useEffect(() => {
 
     {/* Fetch Api */}
     try {
-        const response = await fetch(BASE_URL + endpoint, {
+        const response = await fetch(baseURL + endpoint, {
           // const response = await fetch(`${process.env.REACT_APP_API_URL}/seller/sign-in`, {
           method: 'POST',
           headers: {
