@@ -229,7 +229,7 @@ function AddProduct ({ show, handleClose }) {
                 >
                   {categories.map((category) => (
                     <option key={category.id} value={category.id}>
-                      {category.name}
+                      {category.name} ({category.maxWeight} - {category.minWeight})
                     </option>
                   ))} 
                 </select>
@@ -362,7 +362,7 @@ function AddProduct ({ show, handleClose }) {
 
               {/* Sale */}
               <div className='space-y-2 text-left'>
-                <label htmlFor="numberOfAvailableStocks" className='text-md text-left text-black2'>Available for sale</label><br/>
+                <label htmlFor="numberOfAvailableStocks" className='text-md text-left text-black2'>Number of Available Fishes for sale</label><br/>
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
                   type='text' 
@@ -378,15 +378,6 @@ function AddProduct ({ show, handleClose }) {
               {/* Day of Harvest */}
               <div className='space-y-2 text-left'>
                 <label htmlFor="dateOfHarvest" className='text-md text-left text-black2'>Estimated Day of Harvest</label><br/>
-                {/* <input 
-                  className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
-                  type='text' 
-                  id="dateOfHarvest" 
-                  value={formData.dateOfHarvest}
-                  onChange={handleChange}
-                  name="dateOfHarvest"
-                  // onChange={(e) => setNumberOfAvailableStocks(e.target.value)}
-                /> */}
                 <DatePicker
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2'
                   selected={startDate}

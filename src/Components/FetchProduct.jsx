@@ -1,4 +1,4 @@
-import "../style.css";
+import "../style.css";   
 import { useAuth } from '../Components/AuthContext';
 import Delete from '../Components/Delete';
 import Modal from '../Components/Modal';
