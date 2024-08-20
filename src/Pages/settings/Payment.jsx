@@ -6,6 +6,7 @@ import FetchBanks from "../../Components/FetchBanks";
 import { useState, useEffect } from 'react';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { FaSpinner } from 'react-icons/fa';
+import BeatLoader from "react-spinners/BeatLoader";
 // import { useAuth } from '../Components/AuthContext';
 // import { Link } from 'react-router-dom';
 // import Skeleton from 'react-loading-skeleton';
@@ -42,7 +43,16 @@ const Payment = () => {
         <div>
 
           {loading ? (
-            <p>Loading...</p>
+            <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
+              <BeatLoader
+                  color={'#481986'}
+                  loading={loading}
+                  // cssOverride={override}
+                  size={50}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+              /> 
+            </div>
           ) : (
             <div className="flex flex-row">
               {/* Sidebar */}
