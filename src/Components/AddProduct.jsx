@@ -1,15 +1,20 @@
 import "../style.css";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { LiaImage } from "react-icons/lia";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import Modal from "../Components/Modal";
 import FetchCategory from "../Components/FetchCategory";
 import { Link } from 'react-router-dom';
 import { FaSpinner } from 'react-icons/fa';
+import { MdCalendarMonth } from "react-icons/md";
 import { useAuth } from '../Components/AuthContext';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 // import Slider from '@mui/material/Slider';
 // import Calendar from 'react-calendar';
+// import 'react-calendar/dist/Calendar.css';
 // import Typography from '@mui/material/Typography';
+
 
 function AddProduct ({ show, handleClose }) {
   const [errors, setErrorMessage] = useState({});
@@ -18,7 +23,8 @@ function AddProduct ({ show, handleClose }) {
   const [spin, setSpin] = useState(null);
   const { categories, error } = FetchCategory();
   const { authToken, setStatusCode } = useAuth();
-  // const [value, onChange] = useState<Value>(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
   // const [value, setValue] = useState(30);
   const [formData, setFormData] = useState({
     // name: '',
@@ -31,18 +37,22 @@ function AddProduct ({ show, handleClose }) {
     dateOfHarvest: ''
   });
 
-  const marks = [
-    {
-      value: 0,
-      label: '0',
-    },
-    {
-      value: 3,
-      label: '3kg',
-    },
-  ];
+  // const onChange = (date) => {
+  //   setStartDate(date);
+  // };
 
-  const BASE_URL = 'https://90cf-102-88-71-130.ngrok-free.app/api';
+  // const marks = [
+  //   {
+  //     value: 0,
+  //     label: '0',
+  //   },
+  //   {
+  //     value: 3,
+  //     label: '3kg',
+  //   },
+  // ];
+
+  const baseURL = process.env.REACT_APP_BASE_URL;
   const endpoint = '/seller/product/create-category-product';
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
@@ -54,6 +64,7 @@ function AddProduct ({ show, handleClose }) {
   //   });
   // };
 
+
   const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -61,6 +72,31 @@ function AddProduct ({ show, handleClose }) {
             [name]: value
         });
   };
+
+  const handleDateChange = (date) => {
+    const formattedDate = date.toLocaleDateString('en-GB'); // Formats to dd/mm/yyyy
+    setStartDate(date);
+    setFormData({
+      ...formData,
+      dateOfHarvest: formattedDate.replace(/\//g, '-')
+    });
+  };
+  // console.log("Date: ")
+
+  // const handleDateChange = (date) => {
+  //   setStartDate(date);
+  //   setFormData({
+  //     ...formData,
+  //     dateOfHarvest: date
+  //   });
+  // };
+
+  const CustomInput = forwardRef(({ value, onClick }, ref) => (
+    <button type="button" className="custom-input" onClick={onClick} ref={ref} style={{ display: 'flex', alignItems: 'center', border: '1px solid #f2f2f2', padding: '16px', borderRadius: '6px', width: '100%' }}>
+      <MdCalendarMonth style={{ marginRight: '8px' }} />
+      <span>{value || 'Select Date'}</span>
+    </button>
+  ));
 
 
   // const handleDrop = (e) => {
@@ -116,10 +152,10 @@ function AddProduct ({ show, handleClose }) {
         formPayload.append('weight', formData.weight);
         formPayload.append('numberOfAvailableStocks', formData.numberOfAvailableStocks);
         formPayload.append('price', formData.price);
-        formPayload.append('dayOfHarvest', formData.dateOfHarvest);
+        formPayload.append('dateOfHarvest', formData.dateOfHarvest);
 
     try {
-      const response = await fetch(BASE_URL + endpoint, {
+      const response = await fetch(baseURL + endpoint, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${Atoken}`,
@@ -295,7 +331,7 @@ function AddProduct ({ show, handleClose }) {
 
               {/* Weight */}
               <div className='space-y-2 text-left'>
-                <label htmlFor="price" className='text-md text-left text-black2'>Weight</label><br/> 
+                <label htmlFor="weight" className='text-md text-left text-black2'>Weight</label><br/> 
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black' 
                   type='text' 
@@ -342,15 +378,28 @@ function AddProduct ({ show, handleClose }) {
               {/* Day of Harvest */}
               <div className='space-y-2 text-left'>
                 <label htmlFor="dateOfHarvest" className='text-md text-left text-black2'>Estimated Day of Harvest</label><br/>
-                <input 
+                {/* <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
                   type='text' 
-                  id="dayOfHarvest" 
+                  id="dateOfHarvest" 
                   value={formData.dateOfHarvest}
                   onChange={handleChange}
                   name="dateOfHarvest"
                   // onChange={(e) => setNumberOfAvailableStocks(e.target.value)}
+                /> */}
+                <DatePicker
+                  className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2'
+                  selected={startDate}
+                  // onChange={(date) => setStartDate(date)}
+                  onChange={handleDateChange}
+                  dateFormat="dd-MM-yyyy"
+                  name="dateOfHarvest"
+                  id="dateOfHarvest" 
+                  // value={formData.dateOfHarvest}
+                  placeholderText="dd-mm-yyyy"
+                  customInput={<CustomInput />}
                 />
+
                 {errors.dateOfHarvest && <span style={{ color: 'red' }}>{errors.dateOfHarvest}</span>}<br/>
               </div>
 
