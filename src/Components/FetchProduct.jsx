@@ -132,7 +132,7 @@ const FetchProduct = () => {
       } else{
         setProducts(products.filter((product) => product.id !== productToDelete?.id));
         setShowModal(false);
-        setSuccessMessage(`Product "${productToDelete?.name}" was successfully deleted.`);
+        setSuccessMessage(`Product "${productToDelete?.category.name}" was successfully deleted.`);
         setErrorMessage(``);
         setIsModalOpen(true);
         setProductToDelete(null);
@@ -235,8 +235,9 @@ const FetchProduct = () => {
                       {/* <div className="flex flex-row gap-5 items-center px-2 py-4"> */}
                         {/* <div><img src={product.imageUrl} alt="" className="h-10 w-10 md:h-16 md:w-16 rounded-md"/></div> */}
                         <div className="">
-                            <h1 className="text-sm md:text-md text-left text-black2 font-medium">{product.seller.cooperativeName}</h1>
-                            <h1 className="text-sm text-left text-black2 font-normal">N{product.price}</h1>    
+                            <h1 className="text-sm md:text-md text-left text-black2 font-medium">{product.category.name} - N{product.price}</h1>
+                            <h1 className="text-sm text-left text-black2 font-normal">Weight: {product.weight}</h1> 
+                            <h1 className="text-sm text-left text-black2 font-normal">Quantity: {product.inventory.quantity}</h1>   
                         </div>
                       {/* </div> */}
 
@@ -261,7 +262,7 @@ const FetchProduct = () => {
                   handleClose={closeModal} 
                   onConfirm={confirmDelete} 
                   header="Delete Product" 
-                  body={`Are you sure you want to delete this product "${productToDelete?.name}"?`}
+                  body={`Are you sure you want to delete this product "${productToDelete?.category.name}"?`}
                 />
       </div>
     </div>

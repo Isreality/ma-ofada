@@ -92,9 +92,9 @@ function AddProduct ({ show, handleClose }) {
   // };
 
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
-    <button type="button" className="custom-input" onClick={onClick} ref={ref} style={{ display: 'flex', alignItems: 'center', border: '1px solid #f2f2f2', padding: '16px', borderRadius: '6px', width: '100%' }}>
+    <button type="button" className="custom-input" onClick={onClick} ref={ref} style={{ display: 'flex', alignItems: 'center', border: '1px solid #f2f2f2', padding: '16px', borderRadius: '6px', width: '100%', color: value === 'dd-mm-yyyy' ? '#c4c4c4' : '#646464' }}>
       <MdCalendarMonth style={{ marginRight: '8px' }} />
-      <span>{value || 'Select Date'}</span>
+      <span>{value}</span>
     </button>
   ));
 
@@ -229,7 +229,7 @@ function AddProduct ({ show, handleClose }) {
                 >
                   {categories.map((category) => (
                     <option key={category.id} value={category.id}>
-                      {category.name} ({category.maxWeight} - {category.minWeight})
+                      {category.name} ({category.minWeight} - {category.maxWeight})
                     </option>
                   ))} 
                 </select>
@@ -388,7 +388,7 @@ function AddProduct ({ show, handleClose }) {
                   id="dateOfHarvest" 
                   // value={formData.dateOfHarvest}
                   placeholderText="dd-mm-yyyy"
-                  customInput={<CustomInput />}
+                  customInput={<CustomInput value={formData.dateOfHarvest || 'dd-mm-yyyy'} />}
                 />
 
                 {errors.dateOfHarvest && <span style={{ color: 'red' }}>{errors.dateOfHarvest}</span>}<br/>
