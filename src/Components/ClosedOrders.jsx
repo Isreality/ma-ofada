@@ -88,7 +88,8 @@ const OpenOrders = () => {
                             <h1 className="text-md text-left text-black2 font-medium">{open.product.category.name} ({open.product.category.minWeight} - {open.product.category.maxWeight})</h1>
                             <h1 className="text-sm text-left text-black2 font-normal">Amount: N{open.amount}</h1>    
                             <h1 className="text-sm text-left text-black2 font-normal">Quantity: {open.quantity}</h1> 
-                            <h1 className="text-xs text-left text-black3 font-normal">{open.orderItemsRef}</h1>    
+                            <h1 className="text-xs text-left text-black3 font-normal">{open.orderItemsRef}</h1>
+                            <div className="bg-black py-2 px-1 text-xs rounded-md text-center text-white font-bold">{open.orderState}</div>    
                         </div>
                     </div> 
                 ))}

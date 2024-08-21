@@ -23,7 +23,8 @@ function AddProduct ({ show, handleClose }) {
   const [spin, setSpin] = useState(null);
   const { categories, error } = FetchCategory();
   const { authToken, setStatusCode } = useAuth();
-  const [startDate, setStartDate] = useState(new Date());
+  // const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   // const [date, setDate] = useState(new Date());
   // const [value, setValue] = useState(30);
   const [formData, setFormData] = useState({
@@ -94,7 +95,7 @@ function AddProduct ({ show, handleClose }) {
   const CustomInput = forwardRef(({ value, onClick }, ref) => (
     <button type="button" className="custom-input" onClick={onClick} ref={ref} style={{ display: 'flex', alignItems: 'center', border: '1px solid #f2f2f2', padding: '16px', borderRadius: '6px', width: '100%', color: value === 'dd-mm-yyyy' ? '#c4c4c4' : '#646464' }}>
       <MdCalendarMonth style={{ marginRight: '8px' }} />
-      <span>{value}</span>
+      <span>{value || 'dd-mm-yy'}</span>
     </button>
   ));
 
@@ -126,6 +127,21 @@ function AddProduct ({ show, handleClose }) {
 
   const handleSubmit = async (e) => { 
     e.preventDefault();
+
+    const weightRegex = /^(?=.*(kg|g)).*$/i;
+    if (!weightRegex.test(formData.weight)) {
+        setErrorMessage('Weight must include "kg" or "g".');
+        setSuccessMessage('');
+        setIsModalOpen(true);
+        return;
+    }
+
+    if (!formData.dateOfHarvest) {
+      setErrorMessage('Please select a date.');
+      setSuccessMessage('');
+      setIsModalOpen(true);
+      return;
+    }
 
     // if (!formData.categoryId || !formData.name || !formData.desc || !formData.image || !formData.price || !formData.numberOfAvailableStocks) {
       if (!formData.categoryId || !formData.weight || !formData.price || !formData.numberOfAvailableStocks || !formData.dateOfHarvest) {
@@ -227,6 +243,7 @@ function AddProduct ({ show, handleClose }) {
                   onChange={handleChange}
                   name="categoryId"
                 >
+                  <option>Select Category</option>
                   {categories.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name} ({category.minWeight} - {category.maxWeight})
