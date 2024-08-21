@@ -83,10 +83,12 @@ const OpenOrders = () => {
       <div className="">
                 {data.map((open) => (
                     <div key={open.id} className="flex flex-row gap-5 items-center border-b border-disable p-4">
-                        <div><img src={open.product.imageUrl} alt="" className=" h-10 w-10 md:h-16 md:w-16 rounded-md"/></div>
+                        {/* <div><img src={open.product.imageUrl} alt="" className=" h-10 w-10 md:h-16 md:w-16 rounded-md"/></div> */}
                         <div className="">
-                            <h1 className="text-md text-left text-black2 font-medium">{open.product.name}</h1>
-                            <h1 className="text-sm text-left text-black2 font-normal">N{open.product.price}</h1>    
+                            <h1 className="text-md text-left text-black2 font-medium">{open.product.category.name} ({open.product.category.minWeight} - {open.product.category.maxWeight})</h1>
+                            <h1 className="text-sm text-left text-black2 font-normal">Amount: N{open.amount}</h1>    
+                            <h1 className="text-sm text-left text-black2 font-normal">Quantity: {open.quantity}</h1> 
+                            <h1 className="text-xs text-left text-black3 font-normal">{open.orderItemsRef}</h1>
                         </div>
                     </div> 
                 ))}

@@ -331,7 +331,7 @@ function AddProduct ({ show, handleClose }) {
 
               {/* Weight */}
               <div className='space-y-2 text-left'>
-                <label htmlFor="weight" className='text-md text-left text-black2'>Weight</label><br/> 
+                <label htmlFor="weight" className='text-md text-left text-black2'>Weight(in g or kg)</label><br/> 
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black' 
                   type='text' 
