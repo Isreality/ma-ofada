@@ -75,14 +75,13 @@ function AddProduct ({ show, handleClose }) {
   };
 
   const handleDateChange = (date) => {
-    const formattedDate = date.toLocaleDateString('en-GB'); // Formats to dd/mm/yyyy
+    const formattedDate = date.toLocaleDateString('en-GB'); 
     setStartDate(date);
     setFormData({
       ...formData,
       dateOfHarvest: formattedDate.replace(/\//g, '-')
     });
   };
-  // console.log("Date: ")
 
   // const handleDateChange = (date) => {
   //   setStartDate(date);
