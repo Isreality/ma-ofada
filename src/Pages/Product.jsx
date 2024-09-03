@@ -112,7 +112,7 @@ function Product () {
           {loading ? (
             <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)" }}>
               <BeatLoader
-                  color={'#481986'}
+                  color={'#00923F'}
                   loading={loading}
                   // cssOverride={override}
                   size={50}

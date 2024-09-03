@@ -9,7 +9,7 @@ body {
 
 .active{
   border-radius: 6px;
-  background-color: #481986;
+  background-color: #00923F;
   color: #ffffff !important; 
   /* margin-left: 0.5rem; */
   /* padding: 16px 80px 16px 16px; */
@@ -17,7 +17,7 @@ body {
 
 .active:hover{
   border-radius: 6px;
-  background-color: #481986 !important;
+  background-color: #00923F !important;
   color: #ffffff !important;
   /* padding: 16px 100px 16px 16px;  */
   /* margin: 0.5rem; */
