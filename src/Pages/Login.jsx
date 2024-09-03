@@ -180,7 +180,7 @@ useEffect(() => {
             <div className='space-y-2' style={{ position: 'relative' }}>
               <label htmlFor="pwd" className='text-md md:text-xl text-left mb-8'>Password</label><br/>
               <input 
-                className='border-2 p-6 w-80 md:w-full rounded-md border-fa bg-fa focus:bg-fa focus:outline-primary' 
+                className='border-2 p-4 w-80 md:w-full rounded-md border-fa bg-fa focus:bg-fa focus:outline-primary' 
                 type= {showPassword ? 'text' : 'password'}
                 id = "pwd" 
                 placeholder='Enter your password'
