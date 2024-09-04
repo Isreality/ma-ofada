@@ -378,7 +378,7 @@ function AddProduct ({ show, handleClose }) {
 
               {/* Sale */}
               <div className='space-y-2 text-left'>
-                <label htmlFor="numberOfAvailableStocks" className='text-md text-left text-black2'>Number of Available Fishes for sale</label><br/>
+                <label htmlFor="numberOfAvailableStocks" className='text-md text-left text-black2'>Number of Bags for Sale</label><br/>
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
                   type='text' 
