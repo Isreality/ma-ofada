@@ -358,8 +358,8 @@ function AddProduct ({ show, handleClose }) {
                   name="weight"
                 />
                 {/* <Slider style={{ color: '#481986' }} defaultValue={0} valueLabelDisplay="on" step={0.5} marks={marks} min={0} max={3}/> */}
-                {errors.weight && <span style={{ color: 'red' }}>{errors.weight}</span>}<br/>
-              </div> */}
+                {/* {errors.weight && <span style={{ color: 'red' }}>{errors.weight}</span>}<br/> */}
+              {/* </div> */} 
 
               {/* Price */}
               <div className='space-y-2 text-left'>
