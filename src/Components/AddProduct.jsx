@@ -258,7 +258,7 @@ function AddProduct ({ show, handleClose }) {
 
               {/* Name */}
               <div className='space-y-1 md:space-y-2 items-start text-left'>
-                <label htmlFor="name" className='text-md text-black2'>Product Name</label><br/>
+                <label htmlFor="name" className='text-md text-black2'>Name</label><br/>
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
                   type='text' 
@@ -346,7 +346,7 @@ function AddProduct ({ show, handleClose }) {
               </div>
 
               {/* Weight */}
-              <div className='space-y-2 text-left'>
+              {/* <div className='space-y-2 text-left'>
                 <label htmlFor="weight" className='text-md text-left text-black2'>Weight(in g or kg)</label><br/> 
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black' 
@@ -359,7 +359,7 @@ function AddProduct ({ show, handleClose }) {
                 />
                 {/* <Slider style={{ color: '#481986' }} defaultValue={0} valueLabelDisplay="on" step={0.5} marks={marks} min={0} max={3}/> */}
                 {errors.weight && <span style={{ color: 'red' }}>{errors.weight}</span>}<br/>
-              </div>
+              </div> */}
 
               {/* Price */}
               <div className='space-y-2 text-left'>
