@@ -28,14 +28,14 @@ function AddProduct ({ show, handleClose }) {
   // const [date, setDate] = useState(new Date());
   // const [value, setValue] = useState(30);
   const [formData, setFormData] = useState({
-    name: '',
-    desc: '',
-    image: null,
+    // name: '',
+    // desc: '',
+    // image: null,
     categoryId: '',
-    // weight: '',
+    weight: '',
     numberOfAvailableStocks: '',
-    price: ''
-    // dateOfHarvest: ''
+    price: '',
+    dateOfHarvest: ''
   });
 
   // const onChange = (date) => {
@@ -58,12 +58,12 @@ function AddProduct ({ show, handleClose }) {
   const Atoken = JSON.parse(sessionStorage.getItem('data')).token.original.access_token;
 
 
-  const handleImageChange = (e) => {
-    setFormData({
-        ...formData,
-        image: e.target.files[0]
-    });
-  };
+  // const handleImageChange = (e) => {
+  //   setFormData({
+  //       ...formData,
+  //       image: e.target.files[0]
+  //   });
+  // };
 
 
   const handleChange = (e) => {
@@ -99,25 +99,25 @@ function AddProduct ({ show, handleClose }) {
   ));
 
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    setFormData({
-      ...formData,
-      image: e.dataTransfer.files[0]
-    });
-  };
+  // const handleDrop = (e) => {
+  //   e.preventDefault();
+  //   setFormData({
+  //     ...formData,
+  //     image: e.dataTransfer.files[0]
+  //   });
+  // };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  // const handleDragOver = (e) => {
+  //   e.preventDefault();
+  // };
 
-  const handleRemoveImage = (e) => {
-    // setImage(null);
-    setFormData({
-      ...formData,
-      image: e.target.files[0]
-    });
-  };
+  // const handleRemoveImage = (e) => {
+  //   // setImage(null);
+  //   setFormData({
+  //     ...formData,
+  //     image: e.target.files[0]
+  //   });
+  // };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -127,47 +127,47 @@ function AddProduct ({ show, handleClose }) {
   const handleSubmit = async (e) => { 
     e.preventDefault();
 
-    // const weightRegex = /^(?=.*(kg|g)).*$/i;
-    // if (!weightRegex.test(formData.weight)) {
-    //     setErrorMessage('Weight must include "kg" or "g".');
-    //     setSuccessMessage('');
-    //     setIsModalOpen(true);
-    //     return;
-    // }
+    const weightRegex = /^(?=.*(kg|g)).*$/i;
+    if (!weightRegex.test(formData.weight)) {
+        setErrorMessage('Weight must include "kg" or "g".');
+        setSuccessMessage('');
+        setIsModalOpen(true);
+        return;
+    }
 
-    // if (!formData.dateOfHarvest) {
-    //   setErrorMessage('Please select a date.');
-    //   setSuccessMessage('');
-    //   setIsModalOpen(true);
-    //   return;
-    // }
+    if (!formData.dateOfHarvest) {
+      setErrorMessage('Please select a date.');
+      setSuccessMessage('');
+      setIsModalOpen(true);
+      return;
+    }
 
-    if (!formData.categoryId || !formData.name || !formData.desc || !formData.image || !formData.price || !formData.numberOfAvailableStocks) {
-      // if (!formData.categoryId || !formData.weight || !formData.price || !formData.numberOfAvailableStocks || !formData.dateOfHarvest) {
+    // if (!formData.categoryId || !formData.name || !formData.desc || !formData.image || !formData.price || !formData.numberOfAvailableStocks) {
+      if (!formData.categoryId || !formData.weight || !formData.price || !formData.numberOfAvailableStocks || !formData.dateOfHarvest) {
       setErrorMessage('All fields are required.');
       setSuccessMessage('');
       setIsModalOpen(true);
       return;
     }
 
-    if (formData.desc.length < 100) {
-      setErrorMessage('Description must be at least 100 characters.');
-      setSuccessMessage('');
-      setIsModalOpen(true);
-      return;
-    }
+    // if (formData.desc.length < 100) {
+    //   setErrorMessage('Description must be at least 100 characters.');
+    //   setSuccessMessage('');
+    //   setIsModalOpen(true);
+    //   return;
+    // }
 
     setSpin(true);
  
     const formPayload = new FormData();
-        formPayload.append('name', formData.name);
-        formPayload.append('desc', formData.desc);
-        formPayload.append('image', formData.image);
+        // formPayload.append('name', formData.name);
+        // formPayload.append('desc', formData.desc);
+        // formPayload.append('image', formData.image);
         formPayload.append('categoryId', formData.categoryId);
-        // formPayload.append('weight', formData.weight);
+        formPayload.append('weight', formData.weight);
         formPayload.append('numberOfAvailableStocks', formData.numberOfAvailableStocks);
         formPayload.append('price', formData.price);
-        // formPayload.append('dateOfHarvest', formData.dateOfHarvest);
+        formPayload.append('dateOfHarvest', formData.dateOfHarvest);
 
     try {
       const response = await fetch(baseURL + endpoint, {
@@ -257,7 +257,7 @@ function AddProduct ({ show, handleClose }) {
               </div>
 
               {/* Name */}
-              <div className='space-y-1 md:space-y-2 items-start text-left'>
+              {/* <div className='space-y-1 md:space-y-2 items-start text-left'>
                 <label htmlFor="name" className='text-md text-black2'>Name</label><br/>
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2' 
@@ -268,10 +268,10 @@ function AddProduct ({ show, handleClose }) {
                   name="name"
                 />
                 {errors.name && <span style={{ color: 'red' }}>{errors.name}</span>}<br/>
-              </div>
+              </div> */}
 
               {/* Description */}
-              <div className='space-y-2 text-left'>
+              {/* <div className='space-y-2 text-left'>
                 <label htmlFor="desc" className='text-md text-left text-black2'>Description</label><br/>
                 <textarea 
                   className='border p-4 w-full h-32 rounded-md border-disable bg-white focus:outline-disable text-black2' 
@@ -281,12 +281,12 @@ function AddProduct ({ show, handleClose }) {
                   name="desc"
                 />
                 {errors.desc && <span style={{ color: 'red' }}>{errors.desc}</span>}<br/>
-              </div>
+              </div> */}
 
               {/* Image */}
-              <div className='space-y-2 text-left mb-4'>
-                <label htmlFor="image" className='text-md text-left text-black2'>Upload Image</label><br/>
-                {formData.image ? (
+              {/* <div className='space-y-2 text-left mb-4'> */}
+                {/* <label htmlFor="image" className='text-md text-left text-black2'>Upload Image</label><br/> */}
+                {/* {formData.image ? (
                   <div style={{ display: 'inline-block' }}>
                     <img
                       src={URL.createObjectURL(formData.image)}
@@ -317,8 +317,8 @@ function AddProduct ({ show, handleClose }) {
                       </button>
                     </div>
                   </div>
-                ) : (
-                  <div
+                ) : ( */}
+                  {/* <div
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                     style={{
@@ -328,22 +328,22 @@ function AddProduct ({ show, handleClose }) {
                       textAlign: 'center',
                       cursor: 'pointer',
                     }}
-                  >
-                    <input
+                  > */}
+                    {/* <input
                       type="file"
                       accept=".jpg, .png"
                       onChange={handleImageChange}
                       style={{ display: 'none' }}
                       id="imageInput"
-                    />
-                    <label htmlFor="imageInput" className="text-black2" style={{ cursor: 'pointer' }}>
+                    /> */}
+                    {/* <label htmlFor="imageInput" className="text-black2" style={{ cursor: 'pointer' }}>
                       <div className="grid justify-items-center"><LiaImage className="text-c4 size-32"/></div>
                       Drag and drop files, or <b className="text-primary">Browse</b><br/>
                       <p className="text-xs">JPG, PNG - Max file size (10MB)</p>
                     </label>
                   </div>
-                )}
-              </div>
+                )} */}
+              {/* </div> */}
 
               {/* Weight */}
               {/* <div className='space-y-2 text-left'>
@@ -392,7 +392,7 @@ function AddProduct ({ show, handleClose }) {
               </div>
 
               {/* Day of Harvest */}
-              {/* <div className='space-y-2 text-left'>
+              <div className='space-y-2 text-left'>
                 <label htmlFor="dateOfHarvest" className='text-md text-left text-black2'>Estimated Day of Harvest</label><br/>
                 <DatePicker
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black2'
@@ -408,7 +408,7 @@ function AddProduct ({ show, handleClose }) {
                 />
 
                 {errors.dateOfHarvest && <span style={{ color: 'red' }}>{errors.dateOfHarvest}</span>}<br/>
-              </div> */}
+              </div>
 
               {/* Submit Button */}
               <div className="grid justify-items-end">
