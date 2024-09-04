@@ -74,14 +74,14 @@ function AddProduct ({ show, handleClose }) {
         });
   };
 
-  // const handleDateChange = (date) => {
-  //   const formattedDate = date.toLocaleDateString('en-GB'); 
-  //   setStartDate(date);
-  //   setFormData({
-  //     ...formData,
-  //     dateOfHarvest: formattedDate.replace(/\//g, '-')
-  //   });
-  // };
+  const handleDateChange = (date) => {
+    const formattedDate = date.toLocaleDateString('en-GB'); 
+    setStartDate(date);
+    setFormData({
+      ...formData,
+      dateOfHarvest: formattedDate.replace(/\//g, '-')
+    });
+  };
 
   // const handleDateChange = (date) => {
   //   setStartDate(date);
@@ -346,7 +346,7 @@ function AddProduct ({ show, handleClose }) {
               {/* </div> */}
 
               {/* Weight */}
-              {/* <div className='space-y-2 text-left'>
+              <div className='space-y-2 text-left'>
                 <label htmlFor="weight" className='text-md text-left text-black2'>Weight(in g or kg)</label><br/> 
                 <input 
                   className='border p-4 w-full rounded-md border-disable bg-white focus:outline-disable text-black' 
@@ -358,8 +358,8 @@ function AddProduct ({ show, handleClose }) {
                   name="weight"
                 />
                 {/* <Slider style={{ color: '#481986' }} defaultValue={0} valueLabelDisplay="on" step={0.5} marks={marks} min={0} max={3}/> */}
-                {/* {errors.weight && <span style={{ color: 'red' }}>{errors.weight}</span>}<br/> */}
-              {/* </div> */} 
+                {errors.weight && <span style={{ color: 'red' }}>{errors.weight}</span>}<br/>
+              </div> 
 
               {/* Price */}
               <div className='space-y-2 text-left'>
